@@ -71,9 +71,9 @@ const sf::Vector2f Human::getSize() const
 	return spriteSize;
 }
 
-void Human::setOrigin(const float x, const float y)
+void Human::setOrigin(const float x, const float y) // pass 0.5f, 0.5f to set its origin to center
 {
-	this->sprite.setOrigin(this->getSize().x * 0.5f, this->getSize().y * 0.5f);
+	this->sprite.setOrigin(this->getSize().x * x, this->getSize().y * y);
 }
 
 bool Human::isHit(sf::Sprite obj)
