@@ -9,15 +9,6 @@ void Human::initTexture()
 	}
 }
 
-void Human::initSound()
-{
-	if (this->buffer.loadFromFile("Sound/hit.wav") == false)
-	{
-		std::cout << "HUMAN CLASS::Failed to load sound from file\n";
-	}
-	this->sound.setBuffer(this->buffer);
-}
-
 void Human::initSprite()
 {
 	this->sprite.setTexture(this->texture);
@@ -32,7 +23,6 @@ Human::Human()
 
 	this->initTexture();
 	this->initSprite();
-	this->initSound();
 }
 
 Human::~Human() {}
@@ -79,14 +69,10 @@ void Human::setOrigin(const float x, const float y) // pass 0.5f, 0.5f to set it
 bool Human::isHit(sf::Sprite obj)
 {
 	if (this->sprite.getGlobalBounds().intersects(obj.getGlobalBounds()))
-	{
-		this->playingSound();
 		return true;
-	}
 	return false;
 }
 
-void Human::playingSound() { this->sound.play(); }
 
 void Human::update() {}
 

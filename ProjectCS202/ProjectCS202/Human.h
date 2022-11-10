@@ -13,12 +13,8 @@ class Human
 	sf::Texture texture;
 	float speed;
 
-	sf::SoundBuffer buffer;
-	sf::Sound sound;
-
 	void initSprite();
 	void initTexture();
-	void initSound();
 public:
 	Human();
 	~Human();
@@ -40,7 +36,6 @@ public:
 
 	// Hit an object
 	bool isHit(sf::Sprite obj);
-	void playingSound();
 
 	void update();
 	void render(sf::RenderTarget& target);
