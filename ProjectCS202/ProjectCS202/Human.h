@@ -37,6 +37,10 @@ public:
 	// Hit an object
 	bool isHit(sf::Sprite obj);
 
+	// hit the bound of the screen (not allowed human to go out)
+	void updateCollision(sf::RenderTarget& target); 
+	// call this function in game update(): this->human->updateCollision(*this->window);
+
 	void update();
 	void render(sf::RenderTarget& target);
 };

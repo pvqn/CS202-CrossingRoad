@@ -73,6 +73,26 @@ bool Human::isHit(sf::Sprite obj)
 	return false;
 }
 
+void Human::updateCollision(sf::RenderTarget& target)
+{
+	// left world collision
+	if (this->sprite.getGlobalBounds().left < 0.f) 
+		this->sprite.setPosition(0.f, this->sprite.getGlobalBounds().top);
+
+	// right world collision
+	else if(this->sprite.getGlobalBounds().left + this->sprite.getGlobalBounds().width >= target.getSize().x)
+		this->sprite.setPosition(target.getSize().x - this->sprite.getGlobalBounds().width, 
+								 this->sprite.getGlobalBounds().top);
+	
+	// top world collision
+	if (this->sprite.getGlobalBounds().top < 0.f)
+		this->sprite.setPosition(this->sprite.getGlobalBounds().left, 0.f);
+
+	// bottom world collision
+	else if (this->sprite.getGlobalBounds().top + this->sprite.getGlobalBounds().height >= target.getSize().y)
+		this->sprite.setPosition(this->sprite.getGlobalBounds().left, 
+								 target.getSize().y - this->sprite.getGlobalBounds().height);
+}
 
 void Human::update() {}
 
