@@ -3,7 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include "State.hpp"
 #include "Game.hpp"
-
+#include <sstream>
+#include "DEFINITIONS.hpp"
+#include "GameState.hpp"
+#include <iostream>
+#include <fstream>
 
 	class GameOverState : public State
 	{
@@ -23,5 +27,5 @@
 		sf::Sprite _gameOverTitle;
 
 		sf::Sprite _retryButton;
+		int _score;
 	};
-}

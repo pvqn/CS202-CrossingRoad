@@ -1,13 +1,6 @@
-#pragma once
 
-#include <sstream>
-#include "DEFINITIONS.hpp"
 #include "GameOverState.hpp"
-#include "GameState.hpp"
-#include <iostream>
-#include <fstream>
-namespace Sonar
-{
+
 	GameOverState::GameOverState(GameDataRef data, int score) : _data(data), _score(score)
 	{
 
@@ -58,4 +51,3 @@ namespace Sonar
 		this->_data->window.draw(this->_retryButton);
 		this->_data->window.display();
 	}
-}

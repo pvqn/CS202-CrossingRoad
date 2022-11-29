@@ -5,6 +5,12 @@
 #include "Game.hpp"
 
 
+
+#include <sstream>
+#include "DEFINITIONS.hpp"
+#include "GameState.hpp"
+
+#include <iostream>
 	class MainMenuState : public State
 	{
 	public:

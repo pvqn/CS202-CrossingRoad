@@ -1,9 +1,9 @@
 #include "Human.h"
-
 void Human::initTexture()
 {
 	// load from file
-	if (this->texture.loadFromFile("icons resource/human.png") == false)
+	std::string load=std::string(RESOURCE_PATH) + "human.png";
+	if (this->texture.loadFromFile(load) == false)
 	{
 		std::cout << "HUMAN CLASS::Failed to load texture from file\n";
 	}
@@ -23,6 +23,7 @@ Human::Human()
 
 	this->initTexture();
 	this->initSprite();
+
 }
 
 Human::~Human() {}
@@ -100,4 +101,5 @@ void Human::render(sf::RenderTarget& target)
 {
 	target.draw(this->sprite);
 }
+
 

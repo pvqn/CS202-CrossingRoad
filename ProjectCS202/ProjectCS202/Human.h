@@ -6,16 +6,18 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
-
+#include "DEFINITIONS.hpp"
+#include <string>
 class Human
 {
-	sf::Sprite sprite;
+	
 	sf::Texture texture;
 	float speed;
 
 	void initSprite();
 	void initTexture();
 public:
+sf::Sprite sprite;
 	Human();
 	~Human();
 
@@ -43,5 +45,6 @@ public:
 
 	void update();
 	void render(sf::RenderTarget& target);
+
 };
 

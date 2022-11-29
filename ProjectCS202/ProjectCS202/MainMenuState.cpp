@@ -1,13 +1,6 @@
-#pragma once
 
-#include <sstream>
-#include "DEFINITIONS.hpp"
+
 #include "MainMenuState.hpp"
-#include "GameState.hpp"
-
-#include <iostream>
-
-
 	MainMenuState::MainMenuState(GameDataRef data) : _data(data)
 	{
 
@@ -60,4 +53,3 @@
 
 		this->_data->window.display();
 	}
-}
