@@ -24,7 +24,7 @@
 
 #define RESOURCE_PATH "Resources/res/"
 
-#define VEHICLE_AMOUNT 4
+#define VEHICLE_AMOUNT 5
 #define ANIMAL_AMOUNT 7
 
 #define VEHICLE_WIDTH 185

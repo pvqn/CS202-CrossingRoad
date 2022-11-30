@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <cstdlib>
 #include <vector>
 #include <iostream>
@@ -24,7 +25,7 @@ public:
 	void SetPosXY(float length, float height);
 	void SetSpeed(float Coefficient);
 
-	void Move(int width);
+	void Move(float width);
 	void SwitchLightSignal();
 	bool CheckLight();
 	void Draw(sf::RenderWindow& window);
@@ -52,10 +53,10 @@ public:
 	Dog(float level);
 };
 
-vector<Car> InitCar(int level);
-vector<Truck> InitTruck(int level);
-vector<Sheep> InitSheep(int level);
-vector<Dog> InitDog(int level);
+vector<Car> InitCar(float level);
+vector<Truck> InitTruck(float level);
+vector<Sheep> InitSheep(float level);
+vector<Dog> InitDog(float level);
 void InitTraffic(vector<sf::Sprite>& TrafficLight, sf::Texture& light);
 
 void SwitchLightRed(vector<sf::Sprite>& TrafficLight, sf::Texture& light);

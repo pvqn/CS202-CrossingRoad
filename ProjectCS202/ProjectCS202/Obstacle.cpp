@@ -21,13 +21,13 @@ void Obstacle::SetPosXY(float length, float height)
 	recPos.y = height;
 }
 
-void Obstacle::Move(int width)
+void Obstacle::Move(float width)
 {
 	recPos.x += _Speed;
 	if (recPos.x > SCREEN_WIDTH)
-		recPos.x = -width;
+		recPos.x = -width + recPos.x - SCREEN_WIDTH;
 	else if (recPos.x < -width)
-		recPos.x = SCREEN_WIDTH;
+		recPos.x = SCREEN_WIDTH + recPos.x + width;
 }
 
 void Obstacle::SetSpeed(float Coefficient)
@@ -87,13 +87,13 @@ Dog::Dog(float level) : Obstacle(level)
 	SetSpeed(-DOG_SPEED);
 }
 
-vector<Car> InitCar(int level)
+vector<Car> InitCar(float level)
 {
 	vector<Car> testC;
-	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
+	for (float i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testC.push_back(Car(level));
-		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_AMOUNT * VEHICLE_WIDTH) / (VEHICLE_AMOUNT - 1)), 240);
+		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)), 240);
 	}
 	string Load = string(RESOURCE_PATH) + "car.png";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
@@ -103,13 +103,13 @@ vector<Car> InitCar(int level)
 	return testC;
 }
 
-vector<Truck> InitTruck(int level)
+vector<Truck> InitTruck(float level)
 {
 	vector<Truck> testT;
-	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
+	for (float i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testT.push_back(Truck(level));
-		testT[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_AMOUNT * VEHICLE_WIDTH) / (VEHICLE_AMOUNT - 1)), 636);
+		testT[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)), 636);
 	}
 	string Load = string(RESOURCE_PATH) + "truck.png";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
@@ -119,13 +119,13 @@ vector<Truck> InitTruck(int level)
 	return testT;
 }
 
-vector<Sheep> InitSheep(int level)
+vector<Sheep> InitSheep(float level)
 {
 	vector<Sheep> testS;
-	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
+	for (float i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testS.push_back(Sheep(level));
-		testS[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - ANIMAL_AMOUNT * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 504);
+		testS[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - (ANIMAL_AMOUNT - 2) * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 504);
 	}
 	string Load = string(RESOURCE_PATH) + "sheep.png";
 	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
@@ -135,10 +135,10 @@ vector<Sheep> InitSheep(int level)
 	return testS;
 }
 
-vector<Dog> InitDog(int level)
+vector<Dog> InitDog(float level)
 {
 	vector<Dog> testD;
-	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
+	for (float i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testD.push_back(Dog(level));
 		testD[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - ANIMAL_AMOUNT * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 373);
@@ -228,7 +228,7 @@ void MoveSheep(vector<Sheep> &testS, sf::RenderWindow &window)
 
 void MoveDog(vector<Dog> &testD, sf::RenderWindow &window)
 {
-	for (int i = 0; i < testD.size(); ++i)
+	for (int i = 0; i < testD.size(); i++)
 	{
 		testD[i].Draw(window);
 		testD[i].Move(ANIMAL_WIDTH);
