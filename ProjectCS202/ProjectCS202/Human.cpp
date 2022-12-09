@@ -19,7 +19,7 @@ void Human::initSprite()
 
 Human::Human()
 {
-	this->speed = 7.f;
+	this->speed = 4.f;
 
 	this->initTexture();
 	this->initSprite();

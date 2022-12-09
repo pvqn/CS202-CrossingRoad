@@ -51,10 +51,10 @@
 #define LIGHT_TIME 3
 #define CAR_SPEED 2
 #define TRUCK_SPEED 1.5
-#define DOG_SPEED 1
+#define DOG_SPEED 0.5
 #define SHEEP_SPEED 0.5
 
-#define RED_TIME 5
+#define RED_TIME 3
 #define GREEN_TIME 10
 enum GameStates
 {

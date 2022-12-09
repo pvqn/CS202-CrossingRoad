@@ -116,7 +116,7 @@ void GameState::Update(float dt)
 			// updateTexture
 			_trafficLight2.setTexture(this->_data->assets.GetTexture("Green Light"));
 			_trafficLight1.setTexture(this->_data->assets.GetTexture("Green Light"));
-			_currentTimeTrafficLight=_newTimeTrafficLight;
+			_currentTimeTrafficLight = _newTimeTrafficLight;
 		}
 
 		if (!cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= GREEN_TIME))
@@ -136,10 +136,10 @@ void GameState::Update(float dt)
 			// updateTexture
 			_trafficLight2.setTexture(this->_data->assets.GetTexture("Red Light"));
 			_trafficLight1.setTexture(this->_data->assets.GetTexture("Red Light"));
-						_currentTimeTrafficLight=_newTimeTrafficLight;
-
+			_currentTimeTrafficLight = _newTimeTrafficLight;
 		}
 
+		
 	}
 
 	if (GameStates::eGameOver == _gameState)
