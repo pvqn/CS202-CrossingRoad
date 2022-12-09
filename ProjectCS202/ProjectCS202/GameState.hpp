@@ -10,7 +10,10 @@
 #include <sstream>
 #include "DEFINITIONS.hpp"
 #include "GameOverState.hpp"
+#include "InputManager.hpp"
 #include <iostream>
+#include <time.h>
+#include <stdlib.h>
 	class GameState : public State
 	{
 	public:
@@ -33,11 +36,22 @@
 		sf::Sprite _skyBackground;
 		sf::Sprite _coin;
 
+		sf::Sprite _exitButton;
+		sf::Sprite _menuButton;
+		sf::Sprite _replayButton;
+		sf::Sprite _pauseButton;
+
+		sf::Sprite _trafficLight1;
+		sf::Sprite _trafficLight2;
 		sf::Clock clock;
 
-		int _gameState;
+		float _currentTimeTrafficLight;
+		float _newTimeTrafficLight;
 
+		int _gameState;
 		int _score;
+
+		bool whichPause=true;
 		vector<Sheep> sheeps=InitSheep(1);
 		vector<Car>cars=InitCar(1);
 		vector<Truck>trucks=InitTruck(1);

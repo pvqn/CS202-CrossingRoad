@@ -14,7 +14,7 @@ void Human::initSprite()
 	this->sprite.setTexture(this->texture);
 
 	// scale
-	this->sprite.scale(1.5f, 1.5f);
+	this->sprite.scale(0.7f, 0.7f);
 }
 
 Human::Human()
