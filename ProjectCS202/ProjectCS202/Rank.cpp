@@ -41,7 +41,7 @@ void Rank::sortRank() {
     sort(players.begin(), players.end(), comparePlayerTime);
     sort(players.begin(), players.end(), comparePlayerLevel);
 }
-void Rank::printRank() {
+void Rank::printRankOnTerminal() {
     cout << "-----RANK-----" << endl;
     cout << "LEVEL    TIME" << endl;
     for(int i = 0; i < players.size(); ++i) {
