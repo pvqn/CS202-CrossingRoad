@@ -12,7 +12,7 @@
 	class GameOverState : public State
 	{
 	public:
-		GameOverState(GameDataRef data, int score);
+		GameOverState(GameDataRef data);
 
 		void Init();
 

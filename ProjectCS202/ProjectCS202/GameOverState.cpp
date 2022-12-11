@@ -1,7 +1,7 @@
 
 #include "GameOverState.hpp"
 
-	GameOverState::GameOverState(GameDataRef data, int score) : _data(data), _score(score)
+	GameOverState::GameOverState(GameDataRef data) : _data(data)
 	{
 
 	}

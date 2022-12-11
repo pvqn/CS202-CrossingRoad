@@ -48,7 +48,7 @@ void Rank::read_File_Rank() {
             Player p(level, time);
             players.push_back(p);
         }
-        fin.close;
+        fin.close();
     }
     else {
         cout << "Open file rank failed!" << endl;

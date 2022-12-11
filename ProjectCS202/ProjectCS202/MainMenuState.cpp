@@ -1,5 +1,5 @@
 #include "MainMenuState.hpp"
-
+/*
 void MainMenuState::initWindow()
 {
     this->vm = new sf::VideoMode(1024, 728);
@@ -17,14 +17,14 @@ void MainMenuState::initMainMenu() {
 }
 
 void MainMenuState::initButtons() {
-    this->curMenu = 3; //menu1button
+    this->curMenu = 3;  menu1button
     this->Buttons.resize(Max_main_menu);
     this->ButtonsTex.resize(Max_main_menu);
 
     loadButton(0, "Resources/res/exitbutton.png");
     loadButton(1, "Resources/res/menubutton.png");
-    loadButton(2, "Resources/res/menu1button.png"); 
-    loadButton(3, "Resources/res/playbutton1.png"); //playbutton status at the beginning: selected playbutton
+    loadButton(2, "Resources/res/menu1button.png");
+    loadButton(3, "Resources/res/playbutton1.png");  playbutton status at the beginning: selected playbutton
     loadButton(4, "Resources/res/loadbutton.png");
     loadButton(5, "Resources/res/rankbutton.png");
     loadButton(6, "Resources/res/rulebutton.png");
@@ -97,7 +97,7 @@ void MainMenuState::pollEvents()
             this->window->close();
             break;
         case sf::Event::KeyPressed:
-            if (this->ev.key.code == sf::Keyboard::Enter) 
+            if (this->ev.key.code == sf::Keyboard::Enter)
             {
                 switch (curMenu)
                 {
@@ -140,7 +140,7 @@ void MainMenuState::pollEvents()
                                 break;
                         case 1: this->window->close();
                                 break;
-                        case 3: 
+                        case 3:
                         {
                             Game game;
                             while (game.isRunning())
@@ -184,55 +184,117 @@ void MainMenuState::render() {
 }
 
 MainMenuState:: ~MainMenuState() {}
-	// MainMenuState::MainMenuState(GameDataRef data) : _data(data)
-	// {
+*/
+int GameState::_level=1;
 
-	// }
+MainMenuState::MainMenuState(GameDataRef data) : _data(data)
+{
+}
 
-	// void MainMenuState::Init()
-	// {
-	// 	this->_data->assets.LoadTexture("Main Menu Background", MAIN_MENU_BACKGROUND_FILEPATH);
-	// 	this->_data->assets.LoadTexture("Game Title", GAME_TITLE_FILEPATH);
-	// 	this->_data->assets.LoadTexture("Play Button", PLAY_BUTTON_FILEPATH);
+void MainMenuState::Init()
+{
+    this->_data->assets.LoadTexture("Main Menu Background", MAIN_MENU_BACKGROUND_FILEPATH);
+    this->_data->assets.LoadTexture("Menu Title", MENU_TITLE_FILEPATH);
 
-	// 	_background.setTexture(this->_data->assets.GetTexture("Main Menu Background"));
-	// 	_title.setTexture(this->_data->assets.GetTexture("Game Title"));
-	// 	_playButton.setTexture(this->_data->assets.GetTexture("Play Button"));
+    this->_data->assets.LoadTexture("Play Button", PLAY_BUTTON_FILEPATH);
+    this->_data->assets.LoadTexture("Play1 Button", PLAY1_BUTTON_FILEPATH);
 
-		
-	// }
+    this->_data->assets.LoadTexture("Load Button", LOAD_BUTTON_FILEPATH);
+    this->_data->assets.LoadTexture("Load1 Button", LOAD1_BUTTON_FILEPATH);
 
-	// void MainMenuState::HandleInput()
-	// {
-	// 	sf::Event event;
+    this->_data->assets.LoadTexture("Rank Button", RANK_BUTTON_FILEPATH);
+    this->_data->assets.LoadTexture("Rank1 Button", RANK1_BUTTON_FILEPATH);
 
-	// 	while (this->_data->window.pollEvent(event))
-	// 	{
-	// 		if (sf::Event::Closed == event.type)
-	// 		{
-	// 			this->_data->window.close();
-	// 		}
+    this->_data->assets.LoadTexture("Rule Button", RULE_BUTTON_FILEPATH);
+    this->_data->assets.LoadTexture("Rule1 Button", RULE1_BUTTON_FILEPATH);
 
-	// 		if (this->_data->input.IsSpriteClicked(this->_playButton, sf::Mouse::Left, this->_data->window))
-	// 		{
-	// 			// Switch To Main Menu
-	// 			this->_data->machine.AddState(StateRef(new GameState(_data)), true);
-	// 		}
-	// 	}
-	// }
+    this->_data->assets.LoadTexture("Exit Button", EXIT_BUTTON_FILEPATH);
+    this->_data->assets.LoadTexture("Menu Button", MENU_BUTTON_FILEPATH);
 
-	// void MainMenuState::Update(float dt)
-	// {
-		
-	// }
+    _background.setTexture(this->_data->assets.GetTexture("Main Menu Background"));
+    _menuTitle.setTexture(this->_data->assets.GetTexture("Menu Title"));
 
-	// void MainMenuState::Draw(float dt)
-	// {
-	// 	this->_data->window.clear(sf::Color::Red);
+    _playButton.setTexture(this->_data->assets.GetTexture("Play Button"));
+    _rankButton.setTexture(this->_data->assets.GetTexture("Rank Button"));
+    _ruleButton.setTexture(this->_data->assets.GetTexture("Rule Button"));
+    _loadButton.setTexture(this->_data->assets.GetTexture("Load Button"));
 
-	// 	this->_data->window.draw(this->_background);
-	// 	this->_data->window.draw(this->_title);
-	// 	this->_data->window.draw(this->_playButton);
+    _menuButton.setTexture(this->_data->assets.GetTexture("Menu Button"));
+    _exitButton.setTexture(this->_data->assets.GetTexture("Exit Button"));
 
-	// 	this->_data->window.display();
-	// }
+    _exitButton.setPosition(26.0f, 26.0f);
+    _menuButton.setPosition(83.0f, 26.0f);
+
+    _menuTitle.setPosition(425.0f, 205.0f);
+    _playButton.setPosition(460.0f, 281.0f);
+    _loadButton.setPosition(460.0f, 338.0f);
+    _rankButton.setPosition(450.0f, 395.0f);
+    _ruleButton.setPosition(460.0f, 455.0f);
+}
+
+void MainMenuState::HandleInput()
+{
+    sf::Event event;
+
+    while (this->_data->window.pollEvent(event))
+    {
+        if (sf::Event::Closed == event.type)
+        {
+            this->_data->window.close();
+        }
+
+        // check clicked
+        if (this->_data->input.IsSpriteClicked(this->_playButton, sf::Mouse::Left, this->_data->window))
+        {
+            this->_data->machine.AddState(StateRef(new GameState(_data)), true);
+        }
+
+        // check hovered
+        if (this->_data->input.IsHover(this->_playButton, this->_data->window))
+        {
+            _playButton.setTexture(this->_data->assets.GetTexture("Play1 Button"));
+        }
+        else
+            _playButton.setTexture(this->_data->assets.GetTexture("Play Button"));
+        if (this->_data->input.IsHover(this->_loadButton, this->_data->window))
+        {
+            _loadButton.setTexture(this->_data->assets.GetTexture("Load1 Button"));
+        }
+        else
+            _loadButton.setTexture(this->_data->assets.GetTexture("Load Button"));
+        if (this->_data->input.IsHover(this->_ruleButton, this->_data->window))
+        {
+            _ruleButton.setTexture(this->_data->assets.GetTexture("Rule1 Button"));
+        }
+        else
+            _ruleButton.setTexture(this->_data->assets.GetTexture("Rule Button"));
+        if (this->_data->input.IsHover(this->_rankButton, this->_data->window))
+        {
+            _rankButton.setTexture(this->_data->assets.GetTexture("Rank1 Button"));
+        }
+        else
+            _rankButton.setTexture(this->_data->assets.GetTexture("Rank Button"));
+    }
+}
+
+void MainMenuState::Update(float dt)
+{
+}
+
+void MainMenuState::Draw(float dt)
+{
+    this->_data->window.clear(sf::Color::Red);
+
+    this->_data->window.draw(this->_background);
+    this->_data->window.draw(this->_menuTitle);
+
+    this->_data->window.draw(this->_exitButton);
+    this->_data->window.draw(this->_menuButton);
+
+    this->_data->window.draw(this->_playButton);
+    this->_data->window.draw(this->_rankButton);
+    this->_data->window.draw(this->_ruleButton);
+    this->_data->window.draw(this->_loadButton);
+
+    this->_data->window.display();
+}

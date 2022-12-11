@@ -4,10 +4,15 @@
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 768
 
-#define SPLASH_STATE_SHOW_TIME 0.0
+#define SPLASH_STATE_SHOW_TIME 5.0
 
-#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/"
-#define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/"
+#define QUICKSAND_REGULAR_FONT "Resources/fonts/Quicksand-Regular.otf"
+#define MARKER_FELT_FONT "Resources/fonts/MarkerFelt.ttf"
+#define FLAPPY_FONT "Resources/fonts/FlappyFont.ttf"
+
+
+#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/background1.png"
+#define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/background2.png"
 #define GAME_BACKGROUND_FILEPATH "Resources/res/background.png"
 #define GAME_OVER_BACKGROUND_FILEPATH "Resources/res/"
 
@@ -21,12 +26,21 @@
 #define PAUSE1_BUTTON_FILEPATH "Resources/res/pause1button.png"
 #define PAUSE2_BUTTON_FILEPATH "Resources/res/pause2button.png"
 
+#define LOAD_BUTTON_FILEPATH "Resources/res/loadbutton.png"
+#define LOAD1_BUTTON_FILEPATH "Resources/res/loadbutton1.png"
+#define PLAY_BUTTON_FILEPATH "Resources/res/playbutton.png"
+#define PLAY1_BUTTON_FILEPATH "Resources/res/playbutton1.png"
+#define RANK_BUTTON_FILEPATH "Resources/res/rankbutton.png"
+#define RANK1_BUTTON_FILEPATH "Resources/res/rankbutton1.png"
+#define RULE_BUTTON_FILEPATH "Resources/res/rulebutton.png"
+#define RULE1_BUTTON_FILEPATH "Resources/res/rulebutton1.png"
+
+#define MENU_TITLE_FILEPATH "Resources/res/menu1button.png"
+
+
 #define GREEN_LIGHT_FILEPATH "Resources/res/greenLight.png"
 #define RED_LIGHT_FILEPATH "Resources/res/redLight.png"
 
-
-#define GAME_TITLE_FILEPATH "Resources/res/"
-#define PLAY_BUTTON_FILEPATH "Resources/res/"
 
 #define GAME_OVER_TITLE_FILEPATH "Resources/res/Game-Over-Title.png"
 #define GAME_OVER_BODY_FILEPATH "Resources/res/Game-Over-Body.png" 

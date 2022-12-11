@@ -17,7 +17,14 @@
 
 		return false;
 	}
-
+	bool InputManager::IsHover(sf::Sprite object, sf::RenderWindow &window)
+	{
+		if (object.getGlobalBounds().contains(GetMousePosition(window).x, GetMousePosition(window).y))
+		{
+			return true;
+		}
+		return false;
+	}
 	sf::Vector2i InputManager::GetMousePosition(sf::RenderWindow &window)
 	{
 		return sf::Mouse::getPosition(window);

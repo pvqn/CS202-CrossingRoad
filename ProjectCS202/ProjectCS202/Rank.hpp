@@ -68,7 +68,7 @@ class Rank {
 public:
     // Call default constructor to executive rank state
     // which is chosen is menu state
-    Rank(){};
+    Rank();
     
     // Call constructor(int, float) to executive lose_Rank
     // Pass in the current level, time at the time user lose

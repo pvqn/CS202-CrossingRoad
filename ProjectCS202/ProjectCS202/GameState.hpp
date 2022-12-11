@@ -14,20 +14,26 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
+
 	class GameState : public State
 	{
 	public:
 		GameState(GameDataRef data);
 
 		void Init();
-
 		void HandleInput();
 		void Update(float dt);
 		void Draw(float dt);
+		static void updateLevel()
+		{
+			_level++;
+		}
+			static int _level;
 
 	private:
 		GameDataRef _data;
 
+	
 		sf::Sprite _background;
 		sf::Sprite _laneCar;
 		sf::Sprite _laneSheep;
@@ -52,10 +58,10 @@
 		int _score;
 
 		bool whichPause=true;
-		vector<Sheep> sheeps=InitSheep(1);
-		vector<Car>cars=InitCar(1);
-		vector<Truck>trucks=InitTruck(1);
-		vector<Dog>dogs=InitDog(1);
+		vector<Sheep> sheeps=InitSheep(_level);
+		vector<Car>cars=InitCar(_level);
+		vector<Truck>trucks=InitTruck(_level);
+		vector<Dog>dogs=InitDog(_level);
 
 		Human *human=nullptr;
 

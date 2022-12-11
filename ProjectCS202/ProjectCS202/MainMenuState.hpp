@@ -12,23 +12,24 @@
 #include <SFML/Window.hpp>
 #include "State.hpp"
 #include "Game.hpp"
+
 #define Max_main_menu 7
 
-class MainMenuState {
+/*class MainMenuState {
 private:
     sf::RenderWindow* window;
     sf::VideoMode* vm;
     sf::Event ev;
 
-    // background
+      background
     sf::Sprite MainMenu;
     sf::Texture mainMenuTex;
 
-    //buttons vector
+     buttons vector
     std::vector<sf::Sprite> Buttons;
     std::vector<sf::Texture> ButtonsTex;
 
-    // Mouse
+      Mouse
     sf::Vector2i mousePosWindow;
     sf::Vector2f mousePosView;
 
@@ -49,21 +50,30 @@ public:
     void render();
     ~MainMenuState();
 };
-	// class MainMenuState : public State
-	// {
-	// public:
-	// 	MainMenuState(GameDataRef data);
+*/
+	 class MainMenuState : public State
+	  {
+	  public:
+	  	MainMenuState(GameDataRef data);
 
-	// 	void Init();
+	  	void Init();
 
-	// 	void HandleInput();
-	// 	void Update(float dt);
-	// 	void Draw(float dt);
+	  	void HandleInput();
+	  	void Update(float dt);
+	  	void Draw(float dt);
 
-	// private:
-	// 	GameDataRef _data;
+	  private:
+	  	GameDataRef _data;
 
-	// 	sf::Sprite _background;
-	// 	sf::Sprite _title;
-	// 	sf::Sprite _playButton;
-	// };
+	  	sf::Sprite _background;
+      sf::Sprite _menuTitle;
+
+	  	sf::Sprite _playButton;
+      sf::Sprite _rankButton;
+      sf::Sprite _loadButton;
+      sf::Sprite _ruleButton;
+
+      sf::Sprite _menuButton;
+      sf::Sprite _exitButton;
+
+	  };

@@ -13,7 +13,7 @@ void Obstacle::SetTexture(string Load)
 	}
 
 	sprite.setTexture(model);
-	sprite.scale(0.7f, 0.7f);
+	sprite.scale(0.8f, 0.8f);
 }
 
 void Obstacle::SetPosXY(float length, float height)
@@ -94,7 +94,7 @@ vector<Car> InitCar(float level)
 	for (float i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testC.push_back(Car(level));
-		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)) , 240 + 9.9);
+		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)) , 240 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "car.png";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
@@ -110,7 +110,7 @@ vector<Truck> InitTruck(float level)
 	for (float i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testT.push_back(Truck(level));
-		testT[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)), 636 + 9.9);
+		testT[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)), 636 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "truck.png";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
@@ -126,7 +126,7 @@ vector<Sheep> InitSheep(float level)
 	for (float i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testS.push_back(Sheep(level));
-		testS[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - (ANIMAL_AMOUNT - 2) * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 504 + 9.9);
+		testS[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - (ANIMAL_AMOUNT - 2) * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 504 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "sheep.png";
 	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
@@ -142,7 +142,7 @@ vector<Dog> InitDog(float level)
 	for (float i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testD.push_back(Dog(level));
-		testD[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - ANIMAL_AMOUNT * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 373 + 9.9);
+		testD[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - ANIMAL_AMOUNT * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 373 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "shiba.png";
 	for (int i = 0; i < ANIMAL_AMOUNT; ++i)

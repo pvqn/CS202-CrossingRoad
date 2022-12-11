@@ -55,7 +55,7 @@ void GameState::Init()
 	_trafficLight2.setPosition(0, 174 + 66 * 6);
 
 	human = new Human;
-	human->setPos((SCREEN_WIDTH / 2 - HUMAN_WIDTH / 2), (SCREEN_HEIGHT - HUMAN_HEIGHT));
+	human->setPos((SCREEN_WIDTH / 2 - HUMAN_WIDTH / 2), (SCREEN_HEIGHT - HUMAN_HEIGHT)*1.2);
 	_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
 	//_gameState = GameStates::eReady;
 	_gameState = GameStates::ePlaying;
@@ -144,7 +144,7 @@ void GameState::Update(float dt)
 
 	if (GameStates::eGameOver == _gameState)
 	{
-		_data->machine.AddState(StateRef(new GameOverState(_data, _score)), true);
+		_data->machine.AddState(StateRef(new GameOverState(_data)), true);
 	}
 }
 
