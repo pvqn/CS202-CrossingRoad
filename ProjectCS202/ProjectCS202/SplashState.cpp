@@ -10,7 +10,7 @@
 
 void SplashState::initWindow()
 {
-    this->vm = new sf::VideoMode(1024, 728);
+    this->vm = new sf::VideoMode(1024, 768);
     this->window = new sf::RenderWindow(*this->vm, "ProjectCS202", sf::Style::Titlebar | sf::Style::Close);
 
     this->window->setFramerateLimit(60);
@@ -32,7 +32,7 @@ void SplashState::initText()
     this->text.setFont(this->font);
     this->text.setCharacterSize(30);
     this->text.setString("Press Enter to continue...");
-    this->text.setPosition(330.0f,375.0f);
+    this->text.setPosition(330.0f,400.0f);
 }
 
 SplashState:: SplashState(){
