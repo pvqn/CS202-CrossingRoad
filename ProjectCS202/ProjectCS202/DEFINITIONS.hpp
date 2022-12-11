@@ -31,6 +31,12 @@
 #define GAME_OVER_TITLE_FILEPATH "Resources/res/Game-Over-Title.png"
 #define GAME_OVER_BODY_FILEPATH "Resources/res/Game-Over-Body.png" 
 
+#define RANK_FILE_FILEPATH "Resources/texts/rank.txt"
+#define LOSE_RANK_BACKGROUND_FILEPATH "Resources/res/lose_rank.png"
+#define RANK_STATE_BACKGROUND_FILEPATH "Resources/res/rankState.png"
+
+#define FONT_FOLDER_FILEPATH "Resources/fonts/"
+
 #define RESOURCE_PATH "Resources/res/"
 
 #define VEHICLE_AMOUNT 5
