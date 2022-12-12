@@ -55,7 +55,8 @@ void GameState::Init()
 	_trafficLight2.setPosition(0, 174 + 66 * 6);
 
 	human = new Human;
-	human->setPos((SCREEN_WIDTH / 2 - HUMAN_WIDTH / 2), (SCREEN_HEIGHT - HUMAN_HEIGHT)*1.2);
+	flash = new Flash(_data);
+	human->setPos((SCREEN_WIDTH / 2 - HUMAN_WIDTH / 2), (SCREEN_HEIGHT - HUMAN_HEIGHT) * 1.2);
 	_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
 	//_gameState = GameStates::eReady;
 	_gameState = GameStates::ePlaying;
@@ -77,74 +78,116 @@ void GameState::HandleInput()
 			{
 				_pauseButton.setTexture(this->_data->assets.GetTexture("Pause2 Button"));
 				whichPause = false;
+				_isStop = true;
 			}
 			else
 			{
 				whichPause = true;
 				_pauseButton.setTexture(this->_data->assets.GetTexture("Pause1 Button"));
+				_isStop = false;
 			}
+		}
+		if (this->_data->input.IsSpriteClicked(_replayButton, sf::Mouse::Left, this->_data->window))
+		{
+			_data->machine.AddState(StateRef(new GameState(_data)), true);
+		}
+		if (this->_data->input.IsSpriteClicked(_menuButton, sf::Mouse::Left, this->_data->window))
+		{
+			_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
 		}
 	}
 }
 
 void GameState::Update(float dt)
 {
-	if (GameStates::eGameOver != _gameState)
-	{
-	}
 
 	if (GameStates::ePlaying == _gameState)
 	{
-		human->move();
-		human->updateCollision(this->_data->window);
-
-		_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
-		if (cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= RED_TIME))
+		if (!_isStop)
 		{
-			// switchToGreenLight
-			for (int i = 0; i < cars.size(); ++i)
+			human->move();
+			human->updateCollision(this->_data->window);
+			MoveSheep(sheeps, this->_data->window);
+			MoveCar(cars, this->_data->window);
+			MoveTruck(trucks, this->_data->window);
+			MoveDog(dogs, this->_data->window);
+			_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
+			if (cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= RED_TIME))
 			{
-				cars[i].SwitchLightSignal();
-				cars[i].LightSignal();
-			}
-			for (int i = 0; i < trucks.size(); ++i)
-			{
-				trucks[i].SwitchLightSignal();
-				trucks[i].LightSignal();
+				// switchToGreenLight
+				for (int i = 0; i < cars.size(); ++i)
+				{
+					cars[i].SwitchLightSignal();
+					cars[i].LightSignal();
+				}
+				for (int i = 0; i < trucks.size(); ++i)
+				{
+					trucks[i].SwitchLightSignal();
+					trucks[i].LightSignal();
+				}
+
+				// updateTexture
+				_trafficLight2.setTexture(this->_data->assets.GetTexture("Green Light"));
+				_trafficLight1.setTexture(this->_data->assets.GetTexture("Green Light"));
+				_currentTimeTrafficLight = _newTimeTrafficLight;
 			}
 
-			// updateTexture
-			_trafficLight2.setTexture(this->_data->assets.GetTexture("Green Light"));
-			_trafficLight1.setTexture(this->_data->assets.GetTexture("Green Light"));
-			_currentTimeTrafficLight = _newTimeTrafficLight;
+			if (!cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= GREEN_TIME))
+			{
+				// switchToGreenLight
+				for (int i = 0; i < cars.size(); ++i)
+				{
+					cars[i].SwitchLightSignal();
+					cars[i].LightSignal();
+				}
+				for (int i = 0; i < trucks.size(); ++i)
+				{
+					trucks[i].SwitchLightSignal();
+					trucks[i].LightSignal();
+				}
+
+				// updateTexture
+				_trafficLight2.setTexture(this->_data->assets.GetTexture("Red Light"));
+				_trafficLight1.setTexture(this->_data->assets.GetTexture("Red Light"));
+				_currentTimeTrafficLight = _newTimeTrafficLight;
+			}
+			for (int i = 0; i < VEHICLE_AMOUNT; ++i)
+			{
+				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, trucks[i].getSprite(), 0.7f))
+				{
+					_gameState = GameStates::eGameOver;
+					clock.restart();
+					break;
+				}
+				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, cars[i].getSprite(), 0.7f))
+				{
+					_gameState = GameStates::eGameOver;
+					clock.restart();
+					break;
+				}
+			}
+			for (int i = 0; i < ANIMAL_AMOUNT; ++i)
+			{
+				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, sheeps[i].getSprite(), 0.7f))
+				{
+					_gameState = GameStates::eGameOver;
+					clock.restart();
+					break;
+				}
+				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, dogs[i].getSprite(), 0.7f))
+				{
+					_gameState = GameStates::eGameOver;
+					clock.restart();
+					break;
+				}
+			}
 		}
-
-		if (!cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= GREEN_TIME))
-		{
-			// switchToGreenLight
-			for (int i = 0; i < cars.size(); ++i)
-			{
-				cars[i].SwitchLightSignal();
-				cars[i].LightSignal();
-			}
-			for (int i = 0; i < trucks.size(); ++i)
-			{
-				trucks[i].SwitchLightSignal();
-				trucks[i].LightSignal();
-			}
-
-			// updateTexture
-			_trafficLight2.setTexture(this->_data->assets.GetTexture("Red Light"));
-			_trafficLight1.setTexture(this->_data->assets.GetTexture("Red Light"));
-			_currentTimeTrafficLight = _newTimeTrafficLight;
-		}
-
-		
 	}
-
-	if (GameStates::eGameOver == _gameState)
+	else if (GameStates::eGameOver == _gameState)
 	{
-		_data->machine.AddState(StateRef(new GameOverState(_data)), true);
+		flash->Show(dt);
+		if (clock.getElapsedTime().asSeconds() > BEFORE_GAME_OVER_APPEAR_TIME)
+			_data->machine.AddState(StateRef(new GameOverState(_data)), true);
 	}
 }
 
@@ -168,10 +211,18 @@ void GameState::Draw(float dt)
 	this->_data->window.draw(_trafficLight1);
 	this->_data->window.draw(_trafficLight2);
 
-	MoveSheep(sheeps, this->_data->window);
-	MoveCar(cars, this->_data->window);
-	MoveTruck(trucks, this->_data->window);
-	MoveDog(dogs, this->_data->window);
+	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
+	{
+		trucks[i].Draw(this->_data->window);
+		cars[i].Draw(this->_data->window);
+	}
+
+	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
+	{
+		sheeps[i].Draw(this->_data->window);
+		dogs[i].Draw(this->_data->window);
+	}
 	human->render(this->_data->window);
+	flash->Draw();
 	this->_data->window.display();
 }

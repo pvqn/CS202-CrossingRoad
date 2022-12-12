@@ -14,7 +14,8 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
-
+#include "Flash.h"
+#include "MainMenuState.hpp"
 	class GameState : public State
 	{
 	public:
@@ -64,5 +65,9 @@
 		vector<Dog>dogs=InitDog(_level);
 
 		Human *human=nullptr;
+		Flash *flash=nullptr;
+		sf::RectangleShape _gameOverFlash;
+		bool _flashOn;
+		bool _isStop=false;
 
 	};

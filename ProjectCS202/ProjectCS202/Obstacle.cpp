@@ -33,7 +33,7 @@ void Obstacle::Move(float width)
 
 void Obstacle::SetSpeed(float Coefficient)
 {
-	_Speed = _Level * Coefficient*0.3;
+	_Speed = _Level * Coefficient*3;
 }
 
 void Obstacle::SwitchLightSignal()
@@ -203,7 +203,7 @@ void MoveCar(vector<Car> &testC, sf::RenderWindow &window)
 	for (int i = 0; i < testC.size(); ++i)
 	{
 		testC[i].LightSignal();
-		testC[i].Draw(window);
+		//testC[i].Draw(window);
 		testC[i].Move(VEHICLE_WIDTH);
 	}
 }
@@ -213,7 +213,7 @@ void MoveTruck(vector<Truck> &testT, sf::RenderWindow &window)
 	for (int i = 0; i < testT.size(); ++i)
 	{
 		testT[i].LightSignal();
-		testT[i].Draw(window);
+		//testT[i].Draw(window);
 		testT[i].Move(VEHICLE_WIDTH);
 	}
 }
@@ -222,7 +222,7 @@ void MoveSheep(vector<Sheep> &testS, sf::RenderWindow &window)
 {
 	for (int i = 0; i < testS.size(); ++i)
 	{
-		testS[i].Draw(window);
+		//testS[i].Draw(window);
 		testS[i].Move(ANIMAL_WIDTH);
 	}
 }
@@ -231,7 +231,7 @@ void MoveDog(vector<Dog> &testD, sf::RenderWindow &window)
 {
 	for (int i = 0; i < testD.size(); i++)
 	{
-		testD[i].Draw(window);
+		//testD[i].Draw(window);
 		testD[i].Move(ANIMAL_WIDTH);
 	}
 }

@@ -10,14 +10,13 @@
 #include <string>
 class Human
 {
-	
+	sf::Sprite sprite;
 	sf::Texture texture;
 	float speed;
 
 	void initSprite();
 	void initTexture();
 public:
-sf::Sprite sprite;
 	Human();
 	~Human();
 
@@ -45,6 +44,9 @@ sf::Sprite sprite;
 
 	void update();
 	void render(sf::RenderTarget& target);
-
+	sf::Sprite getSprite()
+	{
+		return this->sprite;
+	}
 };
 

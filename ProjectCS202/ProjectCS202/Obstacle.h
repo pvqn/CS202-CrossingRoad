@@ -29,6 +29,10 @@ public:
 	void SwitchLightSignal();
 	bool CheckLight();
 	void Draw(sf::RenderWindow& window);
+	sf::Sprite getSprite()
+	{
+		return this->sprite;
+	}
 };
 
 class Car : public Obstacle {
