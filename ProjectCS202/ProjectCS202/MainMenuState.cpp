@@ -225,11 +225,11 @@ void MainMenuState::Init()
     _exitButton.setPosition(26.0f, 26.0f);
     _menuButton.setPosition(83.0f, 26.0f);
 
-    _menuTitle.setPosition(425.0f, 205.0f);
-    _playButton.setPosition(460.0f, 281.0f);
-    _loadButton.setPosition(460.0f, 338.0f);
-    _rankButton.setPosition(450.0f, 395.0f);
-    _ruleButton.setPosition(460.0f, 455.0f);
+    _menuTitle.setPosition(425.0f, 215.0f);
+    _playButton.setPosition(460.0f, 291.0f);
+    _loadButton.setPosition(460.0f, 348.0f);
+    _rankButton.setPosition(450.0f, 405.0f);
+    _ruleButton.setPosition(460.0f, 465.0f);
 }
 
 void MainMenuState::HandleInput()

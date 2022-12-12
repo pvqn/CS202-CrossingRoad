@@ -105,7 +105,7 @@ void SplashState::renderText(sf::RenderTarget &target)
         _text.setFont(this->_data->assets.GetFont("Flappy"));
         _text.setCharacterSize(30);
         _text.setString("A PRODUCT OF GROUP 7 APCS2");
-        _text.setPosition(300.0f,385.0f);
+        _text.setPosition(300.0f,405.0f);
         _text.setOutlineColor(sf::Color(44,125,59,255));
         _text.setOutlineThickness(1.0f);
         // Press Enter to continue...

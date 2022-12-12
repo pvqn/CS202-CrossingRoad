@@ -6,6 +6,7 @@
 
 #define SPLASH_STATE_SHOW_TIME 5.0
 #define BEFORE_GAME_OVER_APPEAR_TIME 3.0
+#define BEFORE_GAME_APPEAR_TIME 5.0
 #define FLASH_SPEED 1500.0f
 
 #define QUICKSAND_REGULAR_FONT "Resources/fonts/Quicksand-Regular.otf"
@@ -14,6 +15,9 @@
 
 
 #define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/background1.png"
+#define FINISHED_WIN_BACKGROUND_FILEPATH "Resources/res/winFinishedState.png"
+#define FINISHED_TITLE_BACKGROUND_FILEPATH "Resources/res/levelup.png"
+
 #define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/background2.png"
 #define GAME_BACKGROUND_FILEPATH "Resources/res/background.png"
 #define GAME_OVER_BACKGROUND_FILEPATH "Resources/res/"

@@ -3,7 +3,7 @@
 #include "GameState.hpp"
 #include <stdlib.h>
 #include <time.h>
-
+#include "FinishedWinState.h"
 
 
 Game::Game(int width, int height, std::string title)

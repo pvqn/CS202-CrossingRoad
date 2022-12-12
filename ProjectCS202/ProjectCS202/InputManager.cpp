@@ -20,6 +20,7 @@ bool InputManager::IsHover(sf::Sprite object, sf::RenderWindow &window)
 {
 	if (object.getGlobalBounds().contains(GetMousePosition(window).x, GetMousePosition(window).y))
 	{
+		std::cout <<"HIT \n";
 		return true;
 	}
 	return false;

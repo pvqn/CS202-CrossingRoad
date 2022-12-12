@@ -60,6 +60,7 @@ void GameState::Init()
 	_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
 	//_gameState = GameStates::eReady;
 	_gameState = GameStates::ePlaying;
+	std::cout <<"level " << _level <<" \n";
 }
 
 void GameState::HandleInput()
@@ -93,6 +94,8 @@ void GameState::HandleInput()
 		}
 		if (this->_data->input.IsSpriteClicked(_menuButton, sf::Mouse::Left, this->_data->window))
 		{
+			// ADD SAVE GAME
+			resetLevel();
 			_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
 		}
 	}
@@ -180,6 +183,16 @@ void GameState::Update(float dt)
 					clock.restart();
 					break;
 				}
+			}
+			if (this->_data->input.IsCollision(human->getSprite(), 0.4f, _skyBackground, 0.9f))
+			{
+				if (this->_data->input.IsCollision(human->getSprite(),1.0f, _coin, 1.2f))
+				{
+					updateLevel();
+					_data->machine.AddState(StateRef(new FinishedWinState(_data)), true);
+				}
+				_gameState = GameStates::eGameOver;
+				clock.restart();
 			}
 		}
 	}

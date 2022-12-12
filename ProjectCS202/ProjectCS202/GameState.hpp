@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include "Flash.h"
 #include "MainMenuState.hpp"
+#include "FinishedWinState.h"
 	class GameState : public State
 	{
 	public:
@@ -28,6 +29,10 @@
 		static void updateLevel()
 		{
 			_level++;
+		}
+		static void resetLevel()
+		{
+			_level=1;
 		}
 			static int _level;
 
