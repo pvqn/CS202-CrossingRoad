@@ -2,7 +2,7 @@
 /*
 void MainMenuState::initWindow()
 {
-    this->vm = new sf::VideoMode(1024, 728);
+    this->vm = new sf::VideoMode(1024, 768);
     this->window = new sf::RenderWindow(*this->vm, "ProjectCS202", sf::Style::Titlebar | sf::Style::Close);
 
     this->window->setFramerateLimit(60);
@@ -31,11 +31,11 @@ void MainMenuState::initButtons() {
 
     this->Buttons[0].setPosition(26.0f, 26.0f);
     this->Buttons[1].setPosition(83.0f, 26.0f);
-    this->Buttons[2].setPosition(425.0f, 205.0f);
-    this->Buttons[3].setPosition(460.0f, 281.0f);
-    this->Buttons[4].setPosition(460.0f, 338.0f);
-    this->Buttons[5].setPosition(450.0f, 395.0f);
-    this->Buttons[6].setPosition(460.0f, 455.0f);
+    this->Buttons[2].setPosition(425.0f, 230.0f);
+    this->Buttons[3].setPosition(460.0f, 306.0f);
+    this->Buttons[4].setPosition(460.0f, 363.0f);
+    this->Buttons[5].setPosition(450.0f, 420.0f);
+    this->Buttons[6].setPosition(460.0f, 480.0f);
 }
 
 MainMenuState::MainMenuState() {
