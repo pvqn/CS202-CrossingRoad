@@ -40,6 +40,9 @@
         int getLevel();
         float getTimeEnd();
 
+        void SaveGameToFile();
+        void LoadGameFromeFile();
+
 	private:
 		GameDataRef _data;
 

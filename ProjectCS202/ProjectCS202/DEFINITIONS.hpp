@@ -55,6 +55,8 @@
 #define LOSE_RANK_BACKGROUND_FILEPATH "Resources/res/lose_rank.png"
 #define RANK_STATE_BACKGROUND_FILEPATH "Resources/res/rankState.png"
 
+#define LOAD_FILE_FILEPATH "Resources/texts/load.txt"
+
 #define FONT_FOLDER_FILEPATH "Resources/fonts/"
 
 #define RESOURCE_PATH "Resources/res/"

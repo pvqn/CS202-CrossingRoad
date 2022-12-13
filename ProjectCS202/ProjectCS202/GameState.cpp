@@ -1,6 +1,7 @@
 
 
 #include "GameState.hpp"
+#include <fstream>
 
 GameState::GameState(GameDataRef data) : _data(data)
 {
@@ -247,3 +248,44 @@ float GameState::getTimeEnd() {
     return this->clock.getElapsedTime().asSeconds() - this->time_start;
 }
 int GameState::getLevel() {return this->level;}
+
+void GameState::SaveGameToFile() {
+	ofstream fout;
+   	fout.open(LOAD_FILE_FILEPATH, ios::out);
+    if(fout.is_open()) {
+        // LEVEL
+        fout << _level << endl;
+        // SCORE
+        fout << _score << endl;
+        // TIME
+//        fout << ...
+        // OBSTACLE
+        // Sheep[0] Dog[0] Sheep[1] Dog[1] .....
+        for(int i = 0; i < ANIMAL_AMOUNT; ++i) {
+            fout << sheeps[i].getPosXY().x << " " << sheeps[i].getPosXY().y << " ";
+            fout << dogs[i].getPosXY().x << " " << sheeps[i].getPosXY().y;
+        } fout << endl;
+        // Car[0] Truck[0] Car[1] Truck[1] .....
+        for(int i = 0; i < VEHICLE_AMOUNT; ++i) {
+            fout << cars[i].getPosXY().x << " " << cars[i].getPosXY().y << " ";
+            fout << trucks[i].getPosXY().x << " " << trucks[i].getPosXY().y;
+        } fout << endl;
+        // COIN
+        fout << _coin.getPosition().x << " " << _coin.getPosition().y << endl;
+        // HUMAN
+        fout << this->human->getPos().x << " " << human->getPos().y << endl;
+    }
+    else {
+        cout << "Open saveGame file failed!" << endl;
+    }
+    fout.close();
+}
+void GameState::LoadGameFromeFile() {
+    ifstream fin;
+	fin.open(LOAD_FILE_FILEPATH, ios::in);
+	if(fin.isOpen()) {
+
+	}
+
+	fin.close();
+}
