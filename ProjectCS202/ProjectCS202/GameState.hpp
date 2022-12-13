@@ -36,6 +36,10 @@
 		}
 			static int _level;
 
+		void setTimeStart();
+        int getLevel();
+        float getTimeEnd();
+
 	private:
 		GameDataRef _data;
 
@@ -75,4 +79,5 @@
 		bool _flashOn;
 		bool _isStop=false;
 
+		float _timeStart
 	};

@@ -239,3 +239,11 @@ void GameState::Draw(float dt)
 	flash->Draw();
 	this->_data->window.display();
 }
+
+void GameState::setTimeStart() {
+    this->time_start = this->clock.getElapsedTime().asSeconds();
+}
+float GameState::getTimeEnd() {
+    return this->clock.getElapsedTime().asSeconds() - this->time_start;
+}
+int GameState::getLevel() {return this->level;}
