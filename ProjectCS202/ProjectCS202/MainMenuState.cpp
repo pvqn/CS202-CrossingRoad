@@ -246,7 +246,11 @@ void MainMenuState::HandleInput()
         // check clicked
         if (this->_data->input.IsSpriteClicked(this->_playButton, sf::Mouse::Left, this->_data->window))
         {
-            this->_data->machine.AddState(StateRef(new GameState(_data)), true);
+            this->_data->machine.AddState(StateRef(new GameState(_data, false)), true);
+        }
+        if (this->_data->input.IsSpriteClicked(this->_loadButton, sf::Mouse::Left, this->_data->window))
+        {
+            this->_data->machine.AddState(StateRef(new GameState(_data, true)), true);
         }
 
         // check hovered

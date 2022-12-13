@@ -5,7 +5,7 @@
 #include "State.hpp"
 #include "Game.hpp"
 #include "Obstacle.h"
-
+#include <fstream>
 #include "Human.h"
 #include <sstream>
 #include "DEFINITIONS.hpp"
@@ -20,7 +20,7 @@
 	class GameState : public State
 	{
 	public:
-		GameState(GameDataRef data);
+		GameState(GameDataRef data, bool isLoad);
 
 		void Init();
 		void HandleInput();
@@ -42,6 +42,8 @@
 
         void SaveGameToFile();
         void LoadGameFromeFile();
+
+		
 
 	private:
 		GameDataRef _data;
@@ -68,19 +70,19 @@
 		float _newTimeTrafficLight;
 
 		int _gameState;
-		int _score;
-
 		bool whichPause=true;
-		vector<Sheep> sheeps=InitSheep(_level);
-		vector<Car>cars=InitCar(_level);
-		vector<Truck>trucks=InitTruck(_level);
-		vector<Dog>dogs=InitDog(_level);
+		vector<Sheep> sheeps;
+		vector<Car>cars;
+		vector<Truck>trucks;
+		vector<Dog>dogs;
 
 		Human *human=nullptr;
 		Flash *flash=nullptr;
 		sf::RectangleShape _gameOverFlash;
 		bool _flashOn;
 		bool _isStop=false;
+		bool _isLoad;
+		float _timeStart;
+				float _timePassed;
 
-		float _timeStart
 	};

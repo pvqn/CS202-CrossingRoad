@@ -24,15 +24,16 @@ void FinishedWinState::HandleInput()
         {
             this->_data->window.close();
         }
-        if (clock.getElapsedTime().asSeconds() >= BEFORE_GAME_APPEAR_TIME)
-        {
-            _data->machine.AddState(StateRef(new GameState(_data)), true);
-        }
+        
     }
 }
 
 void FinishedWinState::Update(float dt)
 {
+    if (clock.getElapsedTime().asSeconds() >= BEFORE_GAME_APPEAR_TIME)
+        {
+            _data->machine.AddState(StateRef(new GameState(_data,false)), true);
+        }
 }
 
 void FinishedWinState::Draw(float dt)

@@ -6,7 +6,7 @@
 
 #define SPLASH_STATE_SHOW_TIME 5.0
 #define BEFORE_GAME_OVER_APPEAR_TIME 3.0
-#define BEFORE_GAME_APPEAR_TIME 5.0
+#define BEFORE_GAME_APPEAR_TIME 2.0
 #define FLASH_SPEED 1500.0f
 
 #define QUICKSAND_REGULAR_FONT "Resources/fonts/Quicksand-Regular.otf"

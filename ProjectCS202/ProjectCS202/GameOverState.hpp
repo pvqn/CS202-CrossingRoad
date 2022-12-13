@@ -8,11 +8,11 @@
 #include "GameState.hpp"
 #include <iostream>
 #include <fstream>
-
+#include "Rank.hpp"
 	class GameOverState : public State
 	{
 	public:
-		GameOverState(GameDataRef data);
+		GameOverState(GameDataRef data, Rank rank);
 
 		void Init();
 
@@ -23,9 +23,10 @@
 	private:
 		GameDataRef _data;
 
-		sf::Sprite _background;
-		sf::Sprite _gameOverTitle;
+		sf::Sprite _menuButton;
+		sf::Sprite _exitButton;
+	
+		Rank _rank;
 
-		sf::Sprite _retryButton;
 		int _score;
 	};

@@ -1,9 +1,8 @@
 
 
 #include "GameState.hpp"
-#include <fstream>
 
-GameState::GameState(GameDataRef data) : _data(data)
+GameState::GameState(GameDataRef data, bool isLoad) : _data(data), _isLoad(isLoad)
 {
 }
 
@@ -45,7 +44,6 @@ void GameState::Init()
 	_laneSheep.setPosition(0, 504);
 	_laneDog.setPosition(0, 373);
 	_skyBackground.setPosition(0, 0);
-	_coin.setPosition(55 + (rand() % 845), 171);
 
 	_exitButton.setPosition(26, 26);
 	_menuButton.setPosition(26 + BUTTON_WIDTH, 26);
@@ -57,11 +55,27 @@ void GameState::Init()
 
 	human = new Human;
 	flash = new Flash(_data);
-	human->setPos((SCREEN_WIDTH / 2 - HUMAN_WIDTH / 2), (SCREEN_HEIGHT - HUMAN_HEIGHT) * 1.2);
+
+	if (!_isLoad)
+	{
+		human->setPos((SCREEN_WIDTH / 2 - HUMAN_WIDTH / 2), (SCREEN_HEIGHT - HUMAN_HEIGHT) * 1.2);
+
+		this->sheeps = InitSheep(this->_level);
+		this->trucks = InitTruck(this->_level);
+		this->cars = InitCar(this->_level);
+		this->dogs = InitDog(this->_level);
+		_coin.setPosition(55 + (rand() % 845), 171);
+		setTimeStart();
+	}
+	else
+	{
+		LoadGameFromeFile();
+	}
+
 	_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
 	//_gameState = GameStates::eReady;
 	_gameState = GameStates::ePlaying;
-	std::cout <<"level " << _level <<" \n";
+	std::cout << "level " << _level << " \n";
 }
 
 void GameState::HandleInput()
@@ -91,11 +105,12 @@ void GameState::HandleInput()
 		}
 		if (this->_data->input.IsSpriteClicked(_replayButton, sf::Mouse::Left, this->_data->window))
 		{
-			_data->machine.AddState(StateRef(new GameState(_data)), true);
+			_data->machine.AddState(StateRef(new GameState(_data, false)), true);
 		}
 		if (this->_data->input.IsSpriteClicked(_menuButton, sf::Mouse::Left, this->_data->window))
 		{
 			// ADD SAVE GAME
+			SaveGameToFile();
 			resetLevel();
 			_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
 		}
@@ -160,12 +175,14 @@ void GameState::Update(float dt)
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, trucks[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
+					_timePassed = getTimeEnd();
 					clock.restart();
 					break;
 				}
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, cars[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
+					_timePassed = getTimeEnd();
 					clock.restart();
 					break;
 				}
@@ -175,24 +192,28 @@ void GameState::Update(float dt)
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, sheeps[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
+					_timePassed = getTimeEnd();
 					clock.restart();
 					break;
 				}
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, dogs[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
+					_timePassed = getTimeEnd();
 					clock.restart();
 					break;
 				}
 			}
 			if (this->_data->input.IsCollision(human->getSprite(), 0.4f, _skyBackground, 0.9f))
 			{
-				if (this->_data->input.IsCollision(human->getSprite(),1.0f, _coin, 1.2f))
+				if (this->_data->input.IsCollision(human->getSprite(), 1.0f, _coin, 1.2f))
 				{
 					updateLevel();
 					_data->machine.AddState(StateRef(new FinishedWinState(_data)), true);
 				}
 				_gameState = GameStates::eGameOver;
+				_timePassed = getTimeEnd();
+
 				clock.restart();
 			}
 		}
@@ -241,50 +262,82 @@ void GameState::Draw(float dt)
 	this->_data->window.display();
 }
 
-void GameState::setTimeStart() {
-    this->time_start = this->clock.getElapsedTime().asSeconds();
+void GameState::setTimeStart()
+{
+	this->_timeStart = this->clock.getElapsedTime().asSeconds();
 }
-float GameState::getTimeEnd() {
-    return this->clock.getElapsedTime().asSeconds() - this->time_start;
+float GameState::getTimeEnd()
+{
+	return this->clock.getElapsedTime().asSeconds() - this->_timeStart;
 }
-int GameState::getLevel() {return this->level;}
+int GameState::getLevel() { return this->_level; }
 
-void GameState::SaveGameToFile() {
-	ofstream fout;
-   	fout.open(LOAD_FILE_FILEPATH, ios::out);
-    if(fout.is_open()) {
-        // LEVEL
-        fout << _level << endl;
-        // SCORE
-        fout << _score << endl;
-        // TIME
-//        fout << ...
-        // OBSTACLE
-        // Sheep[0] Dog[0] Sheep[1] Dog[1] .....
-        for(int i = 0; i < ANIMAL_AMOUNT; ++i) {
-            fout << sheeps[i].getPosXY().x << " " << sheeps[i].getPosXY().y << " ";
-            fout << dogs[i].getPosXY().x << " " << sheeps[i].getPosXY().y;
-        } fout << endl;
-        // Car[0] Truck[0] Car[1] Truck[1] .....
-        for(int i = 0; i < VEHICLE_AMOUNT; ++i) {
-            fout << cars[i].getPosXY().x << " " << cars[i].getPosXY().y << " ";
-            fout << trucks[i].getPosXY().x << " " << trucks[i].getPosXY().y;
-        } fout << endl;
-        // COIN
-        fout << _coin.getPosition().x << " " << _coin.getPosition().y << endl;
-        // HUMAN
-        fout << this->human->getPos().x << " " << human->getPos().y << endl;
-    }
-    else {
-        cout << "Open saveGame file failed!" << endl;
-    }
-    fout.close();
-}
-void GameState::LoadGameFromeFile() {
-    ifstream fin;
-	fin.open(LOAD_FILE_FILEPATH, ios::in);
-	if(fin.isOpen()) {
+void GameState::SaveGameToFile()
+{
+	std::ofstream fout;
+	fout.open(LOAD_FILE_FILEPATH, std::ios::out);
+	if (fout.is_open())
+	{
+		// LEVEL
+		fout << _level << std::endl;
 
+		// TIME
+		fout << _timePassed << std::endl;
+		// OBSTACLE
+		// Sheep[0] Dog[0] Sheep[1] Dog[1] .....
+		for (int i = 0; i < ANIMAL_AMOUNT; ++i)
+		{
+			fout << sheeps[i].getSprite().getPosition().x << " " << sheeps[i].getSprite().getPosition().y << " ";
+			fout << dogs[i].getSprite().getPosition().x << " " << sheeps[i].getSprite().getPosition().y;
+		}
+		fout << std::endl;
+		// Car[0] Truck[0] Car[1] Truck[1] .....
+		for (int i = 0; i < VEHICLE_AMOUNT; ++i)
+		{
+			fout << cars[i].getSprite().getPosition().x << " " << cars[i].getSprite().getPosition().y << " ";
+			fout << trucks[i].getSprite().getPosition().x << " " << trucks[i].getSprite().getPosition().y;
+		}
+		fout << std::endl;
+		// COIN
+		fout << _coin.getPosition().x << " " << _coin.getPosition().y << std::endl;
+		// HUMAN
+		fout << this->human->getPos().x << " " << human->getPos().y << std::endl;
+	}
+	else
+	{
+		std::cout << "Open saveGame file failed!" << std::endl;
+	}
+	fout.close();
+}
+void GameState::LoadGameFromeFile()
+{
+	std::ifstream fin;
+	fin.open(LOAD_FILE_FILEPATH, std::ios::in);
+	if (fin.is_open())
+	{
+		fin >> this->_level;
+		fin >> this->_timeStart;
+		for (int i = 0; i < ANIMAL_AMOUNT; ++i)
+		{
+			float x, y;
+			fin >> x >> y;
+			this->sheeps[i].SetPosXY(x, y);
+			fin >> x >> y;
+			this->dogs[i].SetPosXY(x, y);
+		}
+		for (int i = 0; i < VEHICLE_AMOUNT; ++i)
+		{
+			float x, y;
+			fin >> x >> y;
+			this->cars[i].SetPosXY(x, y);
+			fin >> x >> y;
+			this->trucks[i].SetPosXY(x, y);
+		}
+		float x, y;
+		fin >> x >> y;
+		this->_coin.setPosition(x, y);
+		fin >> x >> y;
+		this->human->setPos(x, y);
 	}
 
 	fin.close();
