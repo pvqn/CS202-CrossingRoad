@@ -103,3 +103,62 @@ void Human::render(sf::RenderTarget& target)
 }
 
 
+// NEW ANIMATION
+/* Uncomment to test this
+
+void Human::initTexture()
+{
+	// load from file
+	std::string load=std::string(RESOURCE_PATH) + "humanAnimation.png";
+	if (this->texture.loadFromFile(load) == false)
+	{
+		std::cout << "HUMAN CLASS::Failed to load texture from file\n";
+	}
+}
+void Human::initSprite()
+{
+	this->sprite.setTexture(this->texture);
+    this->intRect.left = 0;
+    this->intRect.top = 0;
+    this->intRect.width = this->sprite.getTexture()->getSize().x/4;
+    this->intRect.height = this->sprite.getTexture()->getSize().y/4;
+    this->sprite.setTextureRect(this->intRect);
+	// scale
+	this->sprite.scale(0.7f, 0.7f);
+}
+void Human::move()
+{
+	float dirX = 0.f, dirY = 0.f;
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+		int xTexture = 0;
+        xTexture = (int)sprite.getPosition().x / frame % 4;
+        xTexture = xTexture * intRect.width;
+        this->sprite.setTextureRect(sf::IntRect(xTexture, intRect.height * 1,intRect.width, intRect.height));
+		dirX = -1.f, dirY = 0.f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+		int xTexture = 0;
+        xTexture = (int)sprite.getPosition().x / frame % 4;
+        xTexture = xTexture * intRect.width;
+        this->sprite.setTextureRect(sf::IntRect(xTexture, intRect.height * 2,intRect.width, intRect.height));
+		dirX = 1.f, dirY = 0.f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+		int xTexture = 0;
+        xTexture = (int)sprite.getPosition().y / frame % 4;
+        xTexture = xTexture * intRect.width;
+        this->sprite.setTextureRect(sf::IntRect(xTexture, intRect.height * 3,intRect.width, intRect.height));
+		dirX = 0.f, dirY = -1.f;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		int xTexture = 0;
+        xTexture = (int)sprite.getPosition().y / frame % 4;
+    	xTexture = xTexture * intRect.width;
+        this->sprite.setTextureRect(sf::IntRect(xTexture, intRect.height * 0,intRect.width, intRect.height));
+		dirX = 0.f, dirY = 1.f;
+	}
+	this->sprite.move(this->speed * dirX, this->speed * dirY);
+}
+
+*/

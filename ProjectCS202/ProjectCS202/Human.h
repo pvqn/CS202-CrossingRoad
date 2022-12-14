@@ -14,6 +14,12 @@ class Human
 	sf::Texture texture;
 	float speed;
 
+
+/*	ANIMATION
+	sf::IntRect intRect;
+    int frame = 10;
+*/
+
 	void initSprite();
 	void initTexture();
 public:
