@@ -10,10 +10,13 @@ void GameOverState::Init()
 
 	this->_data->assets.LoadTexture("Menu Button", MENU_BUTTON_FILEPATH);
 	this->_data->assets.LoadTexture("Exit Button", EXIT_BUTTON_FILEPATH);
+		this->_data->assets.LoadTexture("GameOver BackGround", LOSE_RANK_BACKGROUND_FILEPATH);
+		_rank._sprite.setTexture(this->_data->assets.GetTexture("GameOver BackGround"));
 	_menuButton.setTexture(this->_data->assets.GetTexture("Menu Button"));
 	_exitButton.setTexture(this->_data->assets.GetTexture("Exit Button"));
 	_exitButton.setPosition(26, 26);
 	_menuButton.setPosition(26 + BUTTON_WIDTH, 26);
+	
 }
 
 void GameOverState::HandleInput()
@@ -40,7 +43,8 @@ void GameOverState::Update(float dt)
 void GameOverState::Draw(float dt)
 {
 	this->_data->window.clear(sf::Color::Red);
-	this->_rank.draw(this->_data->window);
-	this->_rank.draw(this->_data->window);
+	this->_data->window.draw(_rank._sprite);
+	
+	
 	this->_data->window.display();
 }

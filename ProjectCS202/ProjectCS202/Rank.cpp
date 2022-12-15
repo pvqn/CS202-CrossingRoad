@@ -164,8 +164,7 @@ Rank::Rank(int level, float ftime) {
     players.push_back(newPlayer);
     
 //        BACKGROUND
-    this->set_Texture1();
-    this->set_Sprite();
+  
 //        pass value
 //        this->set_PosXY(x ,y);
 //        this->set_Size(x, y);

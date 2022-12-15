@@ -52,7 +52,7 @@
 #define GAME_OVER_BODY_FILEPATH "Resources/res/Game-Over-Body.png" 
 
 #define RANK_FILE_FILEPATH "Resources/texts/rank.txt"
-#define LOSE_RANK_BACKGROUND_FILEPATH "Resources/res/lose_rank.png"
+#define LOSE_RANK_BACKGROUND_FILEPATH "Resources/res/lose&rank.png"
 #define RANK_STATE_BACKGROUND_FILEPATH "Resources/res/rankState.png"
 
 #define LOAD_FILE_FILEPATH "Resources/texts/load.txt"

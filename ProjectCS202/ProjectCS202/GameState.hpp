@@ -17,6 +17,7 @@
 #include "Flash.h"
 #include "MainMenuState.hpp"
 #include "FinishedWinState.h"
+#include "Rank.hpp"
 	class GameState : public State
 	{
 	public:
