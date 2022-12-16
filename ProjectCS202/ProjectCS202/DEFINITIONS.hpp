@@ -63,7 +63,7 @@
 #define SOUND_PATH "Resources/sounds/"
 
 #define VEHICLE_AMOUNT 5
-#define ANIMAL_AMOUNT 7
+#define ANIMAL_AMOUNT 6
 
 #define VEHICLE_WIDTH 185
 #define ANIMAL_WIDTH 86
@@ -78,8 +78,8 @@
 #define BUTTON_HEIGHT 57
 
 #define LIGHT_TIME 3
-#define CAR_SPEED 2
-#define TRUCK_SPEED 1.5
+#define CAR_SPEED 1
+#define TRUCK_SPEED 0.75
 #define DOG_SPEED 0.5
 #define SHEEP_SPEED 0.5
 
