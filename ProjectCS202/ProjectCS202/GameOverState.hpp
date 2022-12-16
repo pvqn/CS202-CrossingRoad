@@ -25,7 +25,7 @@
 
 		sf::Sprite _menuButton;
 		sf::Sprite _exitButton;
-	
+		sf::Sprite _replayButton;
 		Rank _rank;
 
 		int _score;

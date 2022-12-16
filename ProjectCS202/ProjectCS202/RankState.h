@@ -28,6 +28,6 @@ class RankState : public State
 	  	sf::Sprite _menuButton;
 	  	sf::Sprite _exitButton;
 
-		Rank *rank;
+		Rank _rank;
         
 	  };

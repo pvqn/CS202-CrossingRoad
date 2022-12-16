@@ -19,7 +19,7 @@ string Player::getStringPlayer() {
         string s2 = to_string(seperate2(time.ss));
         s = s1 + s2;
     } else s = std::to_string(time.ss);
-    string str = le + "   " + h + ":" + m + ":" + s;
+    string str = le + "          " + h + ":" + m + ":" + s;
     return str;
 }
 
@@ -84,17 +84,21 @@ void Rank::set_Font(string font) {
     }
 }
 void Rank::set_Texts() {
-    for(int i = 0; i < players.size(); ++i) {
+    int size=players.size();
+   
+    for(int i = 0; i < size; ++i) {
         string s;
-        s = std::to_string(i+1) + " " + players[i].getStringPlayer() + '\n';
+        s = "      " + players[i].getStringPlayer() + "\n";
+       
         sf::Text t;
         t.setString(s);
+        
         _texts.push_back(t);
     }
 }
 void Rank::set_Texts_PosXY(const float x, const float y) {
     for(int i = 0; i < _texts.size(); ++i) {
-        _texts[i].setPosition(x, (i + 1) * 100 + y);
+        _texts[i].setPosition(x, (i + 1) *50 + y);
     }
 }
 void Rank::set_Texts_Size(const float x, const float y) {
@@ -153,6 +157,8 @@ Rank::Rank() {
     this->read_File_Rank();
     this->sortRank();
     this->set_Texts();
+    this->set_Texts_PosXY(320, 170);
+
 //        pass value
 //        this->set_Font(font name)
 //        this->set_Texts_PosXY(x, y);
@@ -174,8 +180,7 @@ Rank::Rank(int level, float ftime) {
     this->sortRank();
     this->set_Texts();
 //        pass value
-//        this->set_Font(font name)
-//        this->set_Texts_PosXY(x, y);
-//        this->set_Size(x, y);
+    //this->set_Font("FlappyFont");
+    this->set_Texts_PosXY(330, 280);
     this->write_File_Rank();
 }

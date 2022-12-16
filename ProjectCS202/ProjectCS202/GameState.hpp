@@ -66,7 +66,8 @@
 		sf::Sprite _trafficLight1;
 		sf::Sprite _trafficLight2;
 		sf::Clock clock;
-
+		sf::Text Level;
+		sf::Text TimeScreen;
 		float _currentTimeTrafficLight;
 		float _newTimeTrafficLight;
 		float _latestSound;
@@ -77,7 +78,7 @@
 		vector<Car>cars;
 		vector<Truck>trucks;
 		vector<Dog>dogs;
-		Sound sound;
+		//Sound sound;
 
 		Human *human=nullptr;
 		Flash *flash=nullptr;
@@ -86,7 +87,10 @@
 		bool _isStop=false;
 		bool _isLoad;
 		float _timeStart;
-				float _timePassed;
+		float _timePassed;
+
+		
+	
 
 
 	};

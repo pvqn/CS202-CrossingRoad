@@ -134,7 +134,7 @@ vector<Car> InitCar(float level)
 		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)) , 240 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "car.png";
-	string LoadBuffer = string(SOUND_PATH) + "car.mp3";
+	//string LoadBuffer = string(SOUND_PATH) + "car.mp3";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testC[i].SetTexture(Load);
@@ -151,7 +151,7 @@ vector<Truck> InitTruck(float level)
 		testT[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)), 636 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "truck.png";
-	string LoadBuffer = string(SOUND_PATH) + "truck.mp3";
+	//string LoadBuffer = string(SOUND_PATH) + "truck.mp3";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testT[i].SetTexture(Load);
@@ -168,7 +168,7 @@ vector<Sheep> InitSheep(float level)
 		testS[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - (ANIMAL_AMOUNT - 2) * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 504 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "sheep.png";
-	string LoadBuffer = string(SOUND_PATH) + "sheep.mp3";
+	//string LoadBuffer = string(SOUND_PATH) + "sheep.mp3";
 	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testS[i].SetTexture(Load);
@@ -185,7 +185,7 @@ vector<Dog> InitDog(float level)
 		testD[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - ANIMAL_AMOUNT * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 373 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "shiba.png";
-	string LoadBuffer = string(SOUND_PATH) + "shiba.mp3";
+	//string LoadBuffer = string(SOUND_PATH) + "shiba.mp3";
 	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testD[i].SetTexture(Load);

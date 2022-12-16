@@ -12,7 +12,7 @@
 #include <SFML/Window.hpp>
 #include "State.hpp"
 #include "Game.hpp"
-
+#include "RankState.h"
 #define Max_main_menu 7
 
 /*class MainMenuState {

@@ -9,6 +9,8 @@ GameState::GameState(GameDataRef data, bool isLoad) : _data(data), _isLoad(isLoa
 void GameState::Init()
 {
 	srand(time(NULL));
+	this->_data->assets.LoadFont("FlappyFont", FLAPPY_FONT);
+	
 	this->_data->assets.LoadTexture("Game Background", GAME_BACKGROUND_FILEPATH);
 	this->_data->assets.LoadTexture("Lane", GAME_BACKGROUND_LANE_FILEPATH);
 	this->_data->assets.LoadTexture("Sky", GAME_BACKGROUND_SKY_FILEPATH);
@@ -72,10 +74,30 @@ void GameState::Init()
 		LoadGameFromeFile();
 	}
 
-	_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
+_currentTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
 	//_gameState = GameStates::eReady;
 	_gameState = GameStates::ePlaying;
-	std::cout << "level " << _level << " \n";
+	
+	if (_level < 10)
+		Level.setString("LEVEL 0" + std::to_string(_level));
+	else
+		Level.setString("LEVEL " + std::to_string( _level));
+	Level.setFont(this->_data->assets.GetFont("FlappyFont"));
+	Level.setPosition(850, 64);
+	Level.setCharacterSize(39);
+	Level.setFillColor(sf::Color(242, 236, 219, 255));
+	Level.setOutlineColor(sf::Color(44, 125, 59, 255));
+	Level.setOutlineThickness(1.0f);
+	
+	TimeScreen.setString("00:00");
+	TimeScreen.setFont(this->_data->assets.GetFont("FlappyFont"));
+	TimeScreen.setPosition(850, 0);
+	TimeScreen.setCharacterSize(64);
+	TimeScreen.setFillColor(sf::Color(242, 236, 219, 255));
+	TimeScreen.setOutlineColor(sf::Color(44, 125, 59, 255));
+	TimeScreen.setOutlineThickness(1.0f);
+
+	
 }
 
 void GameState::HandleInput()
@@ -122,6 +144,17 @@ void GameState::Update(float dt)
 
 	if (GameStates::ePlaying == _gameState)
 	{
+		Time temp(getTimeEnd());
+		sf::String timeTemp;
+		if (temp.ss < 10)
+			timeTemp = "0" + std::to_string(temp.ss);
+		else
+			timeTemp = std::to_string(temp.ss);
+		if (temp.mm < 10)
+			timeTemp = "0" + std::to_string(temp.mm) + ":" + timeTemp;
+		else
+			timeTemp = std::to_string(temp.mm) + ":" + timeTemp;
+		TimeScreen.setString(timeTemp);
 		if (!_isStop)
 		{
 			human->move();
@@ -131,14 +164,17 @@ void GameState::Update(float dt)
 			MoveTruck(trucks, this->_data->window);
 			MoveDog(dogs, this->_data->window);
 			_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
-			if (this->clock.getElapsedTime().asSeconds() >= _latestSound + SOUND_PLAY_INTERVAL)
+			/*if (this->clock.getElapsedTime().asSeconds() >= _latestSound + SOUND_PLAY_INTERVAL)
 			{
 				_latestSound = this->clock.getElapsedTime().asSeconds();
 				sound.PlaySound();
-			}
+			}*/
 			if (cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= RED_TIME))
 			{
 				// switchToGreenLight
+				std::cout << "switch to red \n";
+				std::cout << cars[0].CheckLight() << "\n";
+
 				for (int i = 0; i < cars.size(); ++i)
 				{
 					cars[i].SwitchLightSignal();
@@ -159,6 +195,8 @@ void GameState::Update(float dt)
 			if (!cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= GREEN_TIME))
 			{
 				// switchToGreenLight
+				std::cout << "switch to green \n";
+				std::cout << cars[0].CheckLight()<<"\n";
 				for (int i = 0; i < cars.size(); ++i)
 				{
 					cars[i].SwitchLightSignal();
@@ -250,6 +288,7 @@ void GameState::Draw(float dt)
 
 	this->_data->window.draw(_trafficLight1);
 	this->_data->window.draw(_trafficLight2);
+	this->_data->window.draw(Level);
 
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
@@ -264,6 +303,7 @@ void GameState::Draw(float dt)
 	}
 	human->render(this->_data->window);
 	flash->Draw();
+	this->_data->window.draw(this->TimeScreen);
 	this->_data->window.display();
 }
 

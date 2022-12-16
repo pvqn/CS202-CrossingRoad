@@ -10,4 +10,4 @@ target_link_libraries(ProjectCS202 sfml-graphics
                                       sfml-window 
                                       sfml-system
                                       sfml-audio)
-# TODO: Add tests and install targets if needed.
+# TODO: Add tests and install targets if needed
