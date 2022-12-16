@@ -88,5 +88,4 @@
 		float _timeStart;
 				float _timePassed;
 
-
 	};

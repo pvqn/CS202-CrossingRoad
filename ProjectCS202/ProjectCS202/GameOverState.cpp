@@ -44,7 +44,8 @@ void GameOverState::Draw(float dt)
 {
 	this->_data->window.clear(sf::Color::Red);
 	this->_data->window.draw(_rank._sprite);
-	
+	this->_data->window.draw(_menuButton);
+	this->_data->window.draw(_exitButton);
 	
 	this->_data->window.display();
 }
