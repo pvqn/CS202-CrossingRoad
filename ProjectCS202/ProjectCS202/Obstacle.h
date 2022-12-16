@@ -9,7 +9,20 @@
 using std::vector;
 using std::string;
 
-
+class Sound {
+private:
+	sf::SoundBuffer bufferCar;
+	sf::SoundBuffer bufferTruck;
+	sf::SoundBuffer bufferSheep;
+	sf::SoundBuffer bufferDog;
+	sf::Sound _dog;
+	sf::Sound _sheep;
+	sf::Sound _truck;
+	sf::Sound _car;
+public:
+	Sound();
+	void PlaySound();
+};
 class Obstacle {
 private:
 	sf::Vector2f recPos;

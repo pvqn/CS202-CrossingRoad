@@ -1,5 +1,39 @@
 #include "Obstacle.h"
 
+Sound::Sound()
+{
+	string Load = string(SOUND_PATH) + string("car.wav");
+	if (!bufferCar.loadFromFile(Load))
+		std::cout << "ERROR";
+	Load = string(SOUND_PATH) + string("truck.wav");
+	if (!bufferTruck.loadFromFile(Load))
+		std::cout << "ERROR";
+	Load = string(SOUND_PATH) + string("Sheep.wav");
+	if (!bufferSheep.loadFromFile(Load))
+		std::cout << "ERROR";
+	Load = string(SOUND_PATH) + string("shiba.wav");
+	if (!bufferDog.loadFromFile(Load))
+		std::cout << "ERROR";
+
+	_car.setBuffer(bufferCar);
+	_truck.setBuffer(bufferTruck);
+	_sheep.setBuffer(bufferSheep);
+	_dog.setBuffer(bufferDog);
+}
+
+void Sound::PlaySound()
+{
+	//srand(time(0));
+	int choice = rand() % 4;
+	if (choice == 0)
+		_car.play();
+	else if (choice == 1)
+		_truck.play();
+	else if (choice == 2)
+		_sheep.play();
+	else _dog.play();
+}
+
 Obstacle::Obstacle(float level)
 {
 	_Level = level;
@@ -21,6 +55,7 @@ void Obstacle::SetPosXY(float length, float height)
 	recPos.x = length;
 	recPos.y = height;
 }
+
 
 void Obstacle::Move(float width)
 {
@@ -54,9 +89,11 @@ void Obstacle::Draw(sf::RenderWindow &window)
 	window.draw(sprite);
 }
 
+
 Car::Car(float level) : Obstacle(level)
 {
 	SetSpeed(CAR_SPEED);
+	
 };
 void Car::LightSignal()
 {
@@ -97,6 +134,7 @@ vector<Car> InitCar(float level)
 		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)) , 240 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "car.png";
+	string LoadBuffer = string(SOUND_PATH) + "car.mp3";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testC[i].SetTexture(Load);
@@ -113,6 +151,7 @@ vector<Truck> InitTruck(float level)
 		testT[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)), 636 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "truck.png";
+	string LoadBuffer = string(SOUND_PATH) + "truck.mp3";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testT[i].SetTexture(Load);
@@ -129,6 +168,7 @@ vector<Sheep> InitSheep(float level)
 		testS[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - (ANIMAL_AMOUNT - 2) * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 504 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "sheep.png";
+	string LoadBuffer = string(SOUND_PATH) + "sheep.mp3";
 	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testS[i].SetTexture(Load);
@@ -145,6 +185,7 @@ vector<Dog> InitDog(float level)
 		testD[i].SetPosXY(i * (ANIMAL_WIDTH + (SCREEN_WIDTH - ANIMAL_AMOUNT * ANIMAL_WIDTH) / (ANIMAL_AMOUNT - 1)), 373 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "shiba.png";
+	string LoadBuffer = string(SOUND_PATH) + "shiba.mp3";
 	for (int i = 0; i < ANIMAL_AMOUNT; ++i)
 	{
 		testD[i].SetTexture(Load);

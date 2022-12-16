@@ -35,7 +35,7 @@ bool comparePlayerTime(Player p1, Player p2) {
 
 void Rank::read_File_Rank() {
     ifstream fin;
-   fin.open("RANK_FILE_FILEPATH", ios::in);
+   fin.open(RANK_FILE_FILEPATH, ios::in);
     if(fin.is_open()) {
         int n;
         fin >> n; fin.ignore();
@@ -56,7 +56,7 @@ void Rank::read_File_Rank() {
 }
 void Rank::write_File_Rank() {
     ofstream fout;
-    fout.open("RANK_FILE_FILEPATH", ios::out);
+    fout.open(RANK_FILE_FILEPATH, ios::out);
     if(fout.is_open()) {
         this->sortRank();
         fout << players.size() << endl;

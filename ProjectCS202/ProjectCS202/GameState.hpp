@@ -69,6 +69,7 @@
 
 		float _currentTimeTrafficLight;
 		float _newTimeTrafficLight;
+		float _latestSound;
 
 		int _gameState;
 		bool whichPause=true;
@@ -76,6 +77,7 @@
 		vector<Car>cars;
 		vector<Truck>trucks;
 		vector<Dog>dogs;
+		Sound sound;
 
 		Human *human=nullptr;
 		Flash *flash=nullptr;
@@ -85,5 +87,6 @@
 		bool _isLoad;
 		float _timeStart;
 				float _timePassed;
+
 
 	};

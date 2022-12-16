@@ -60,6 +60,7 @@
 #define FONT_FOLDER_FILEPATH "Resources/fonts/"
 
 #define RESOURCE_PATH "Resources/res/"
+#define SOUND_PATH "Resources/sounds/"
 
 #define VEHICLE_AMOUNT 5
 #define ANIMAL_AMOUNT 7
@@ -84,6 +85,7 @@
 
 #define RED_TIME 3
 #define GREEN_TIME 10
+#define SOUND_PLAY_INTERVAL 4
 enum GameStates
 {
 	eReady,
