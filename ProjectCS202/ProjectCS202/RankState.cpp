@@ -32,7 +32,7 @@ void RankState::HandleInput()
 
 	while (this->_data->window.pollEvent(event))
 	{
-		if (sf::Event::Closed == event.type)
+		if (sf::Event::Closed == event.type || this->_data->input.IsSpriteClicked(_exitButton, sf::Mouse::Left, this->_data->window))
 		{
 			this->_data->window.close();
 		}

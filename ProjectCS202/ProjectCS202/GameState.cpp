@@ -136,6 +136,13 @@ void GameState::HandleInput()
 			resetLevel();
 			_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
 		}
+		if (this->_data->input.IsSpriteClicked(_exitButton, sf::Mouse::Left, this->_data->window))
+		{
+			// ADD SAVE GAME
+			SaveGameToFile();
+			resetLevel();
+			this->_data->window.close();
+		}
 	}
 }
 

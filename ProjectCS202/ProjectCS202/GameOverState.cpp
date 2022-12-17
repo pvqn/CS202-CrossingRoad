@@ -50,6 +50,11 @@ void GameOverState::HandleInput()
 		{
 			_data->machine.AddState(StateRef(new GameState(_data, false)), true);
 		}
+		if (_data->input.IsSpriteClicked(_exitButton, sf::Mouse::Left, _data->window))
+		{
+			GameState::resetLevel();
+			this->_data->window.close();
+		}
 	}
 }
 
