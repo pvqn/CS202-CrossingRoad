@@ -36,6 +36,6 @@ std::cout <<"hello";
     }
   
  delete test;*/
- Game(SCREEN_WIDTH,SCREEN_HEIGHT,"test");
+ Game(SCREEN_WIDTH,SCREEN_HEIGHT,"CROSSING ROAD");
     return 0;
 }

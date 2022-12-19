@@ -132,6 +132,7 @@ void GameState::HandleInput()
 		if (this->_data->input.IsSpriteClicked(_menuButton, sf::Mouse::Left, this->_data->window))
 		{
 			// ADD SAVE GAME
+			_timePassed = getTimeEnd() + _timeStart;
 			SaveGameToFile();
 			resetLevel();
 			_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
@@ -139,6 +140,7 @@ void GameState::HandleInput()
 		if (this->_data->input.IsSpriteClicked(_exitButton, sf::Mouse::Left, this->_data->window))
 		{
 			// ADD SAVE GAME
+			_timePassed = getTimeEnd() + _timeStart;
 			SaveGameToFile();
 			resetLevel();
 			this->_data->window.close();
@@ -151,7 +153,8 @@ void GameState::Update(float dt)
 
 	if (GameStates::ePlaying == _gameState)
 	{
-		Time temp(getTimeEnd());
+		Time temp(getTimeEnd()+_timeStart);
+		std::cout << _timeStart + getTimeEnd() << "\n";
 		sf::String timeTemp;
 		if (temp.ss < 10)
 			timeTemp = "0" + std::to_string(temp.ss);
@@ -225,14 +228,14 @@ void GameState::Update(float dt)
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, trucks[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					_timePassed = getTimeEnd();
+					
 					clock.restart();
 					break;
 				}
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, cars[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					_timePassed = getTimeEnd();
+					
 					clock.restart();
 					break;
 				}
@@ -242,14 +245,14 @@ void GameState::Update(float dt)
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, sheeps[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					_timePassed = getTimeEnd();
+					
 					clock.restart();
 					break;
 				}
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, dogs[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					_timePassed = getTimeEnd();
+					
 					clock.restart();
 					break;
 				}
@@ -262,7 +265,7 @@ void GameState::Update(float dt)
 					_data->machine.AddState(StateRef(new FinishedWinState(_data)), true);
 				}
 				_gameState = GameStates::eGameOver;
-				_timePassed = getTimeEnd();
+				
 
 				clock.restart();
 			}
@@ -271,6 +274,7 @@ void GameState::Update(float dt)
 	else if (GameStates::eGameOver == _gameState)
 	{
 		flash->Show(dt);
+		_timePassed = getTimeEnd() + _timeStart;
 		if (clock.getElapsedTime().asSeconds() > BEFORE_GAME_OVER_APPEAR_TIME)
 			_data->machine.AddState(StateRef(new GameOverState(_data,Rank(this->_level,this->_timePassed))), true);
 	}
@@ -316,11 +320,11 @@ void GameState::Draw(float dt)
 
 void GameState::setTimeStart()
 {
-	this->_timeStart = this->clock.getElapsedTime().asSeconds();
+	this->_timeStart = 0;
 }
 float GameState::getTimeEnd()
 {
-	return this->clock.getElapsedTime().asSeconds() - this->_timeStart;
+	return this->clock.getElapsedTime().asSeconds();
 }
 int GameState::getLevel() { return this->_level; }
 
