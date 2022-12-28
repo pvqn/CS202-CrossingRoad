@@ -174,11 +174,11 @@ void GameState::Update(float dt)
 			MoveTruck(trucks, this->_data->window);
 			MoveDog(dogs, this->_data->window);
 			_newTimeTrafficLight = this->clock.getElapsedTime().asSeconds();
-			/*if (this->clock.getElapsedTime().asSeconds() >= _latestSound + SOUND_PLAY_INTERVAL)
+			if (this->clock.getElapsedTime().asSeconds() >= _latestSound + SOUND_PLAY_INTERVAL)
 			{
 				_latestSound = this->clock.getElapsedTime().asSeconds();
 				sound.PlaySound();
-			}*/
+			}
 			if (cars[0].CheckLight() && (_newTimeTrafficLight - _currentTimeTrafficLight >= RED_TIME))
 			{
 				// switchToGreenLight

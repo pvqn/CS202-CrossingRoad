@@ -61,6 +61,7 @@
 
 #define RESOURCE_PATH "Resources/res/"
 #define SOUND_PATH "Resources/sounds/"
+#define MUSIC_PATH "Resources/sounds/background.wav"
 
 #define VEHICLE_AMOUNT 5
 #define ANIMAL_AMOUNT 6

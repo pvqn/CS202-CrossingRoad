@@ -19,6 +19,7 @@ Sound::Sound()
 	_truck.setBuffer(bufferTruck);
 	_sheep.setBuffer(bufferSheep);
 	_dog.setBuffer(bufferDog);
+	
 }
 
 void Sound::PlaySound()

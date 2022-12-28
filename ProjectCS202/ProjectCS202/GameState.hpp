@@ -78,7 +78,7 @@
 		vector<Car>cars;
 		vector<Truck>trucks;
 		vector<Dog>dogs;
-		//Sound sound;
+		Sound sound;
 
 		Human *human=nullptr;
 		Flash *flash=nullptr;
