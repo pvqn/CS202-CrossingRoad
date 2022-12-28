@@ -28,7 +28,7 @@ private:
 	// Updates run at 60 per second.
 	const float dt = 1.0f / 60.0f;
 	sf::Clock _clock;
-	sf::Music music;
+	//sf::Music music;
 	GameDataRef _data = std::make_shared<GameData>();
 
 	void Run();

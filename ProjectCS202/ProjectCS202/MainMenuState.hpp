@@ -77,3 +77,5 @@ public:
       sf::Sprite _exitButton;
 
 	  };
+
+     

@@ -1,4 +1,5 @@
 #include "RankState.h"
+#include "GameOverState.hpp"
 RankState::RankState(GameDataRef data) : _data(data)
 {
 }
