@@ -1,7 +1,7 @@
 
 #include "GameOverState.hpp"
-sf::Music music1;
-sf::Music music2;
+
+
 GameOverState::GameOverState(GameDataRef data, Rank rank) : _data(data), _rank(rank)
 {
 }
@@ -29,8 +29,6 @@ void GameOverState::Init()
 	_exitButton.setPosition(26, 26);
 	_menuButton.setPosition(26 + BUTTON_WIDTH, 26); 
 	_replayButton .setPosition(26 + 2*BUTTON_WIDTH, 26);
-	music2.openFromFile(string(FAIL_MUSIC_PATH));
-	music2.setVolume(50);
 }
 
 void GameOverState::HandleInput()
@@ -46,10 +44,14 @@ void GameOverState::HandleInput()
 		if (_data->input.IsSpriteClicked(_menuButton, sf::Mouse::Left, _data->window))
 		{
 			GameState::resetLevel();
+			music1.play();
+			music2.stop();
 			_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
 		}
 		if (_data->input.IsSpriteClicked(_replayButton, sf::Mouse::Left, _data->window))
 		{
+			music1.play();
+			music2.stop();
 			_data->machine.AddState(StateRef(new GameState(_data, false)), true);
 		}
 		if (_data->input.IsSpriteClicked(_exitButton, sf::Mouse::Left, _data->window))
@@ -62,11 +64,6 @@ void GameOverState::HandleInput()
 
 void GameOverState::Update(float dt)
 {
-	if (music1.getStatus() == music1.Playing)
-	{
-		music1.stop();
-		music2.play();
-	}
 }
 
 void GameOverState::Draw(float dt)

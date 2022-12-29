@@ -1,10 +1,10 @@
 
-
 #include "GameState.hpp"
 
 GameState::GameState(GameDataRef data, bool isLoad) : _data(data), _isLoad(isLoad)
 {
 }
+
 
 void GameState::Init()
 {
@@ -132,6 +132,7 @@ void GameState::HandleInput()
 		if (this->_data->input.IsSpriteClicked(_menuButton, sf::Mouse::Left, this->_data->window))
 		{
 			// ADD SAVE GAME
+			music1.setVolume(50);
 			_timePassed = getTimeEnd() + _timeStart;
 			SaveGameToFile();
 			resetLevel();
@@ -150,7 +151,6 @@ void GameState::HandleInput()
 
 void GameState::Update(float dt)
 {
-
 	if (GameStates::ePlaying == _gameState)
 	{
 		Time temp(getTimeEnd()+_timeStart);
@@ -276,7 +276,12 @@ void GameState::Update(float dt)
 		flash->Show(dt);
 		_timePassed = getTimeEnd() + _timeStart;
 		if (clock.getElapsedTime().asSeconds() > BEFORE_GAME_OVER_APPEAR_TIME)
-			_data->machine.AddState(StateRef(new GameOverState(_data,Rank(this->_level,this->_timePassed))), true);
+		{
+			music1.stop();
+			music2.play();
+			_data->machine.AddState(StateRef(new GameOverState(_data, Rank(this->_level, this->_timePassed))), true);
+		}
+			
 	}
 }
 

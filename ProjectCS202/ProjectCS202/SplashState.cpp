@@ -130,7 +130,7 @@ void SplashState::renderText(sf::RenderTarget &target)
 	  {
 	  	if (this->_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
 	  	{
-	  		
+            music1.play();
 	  		this->_data->machine.AddState(StateRef(new MainMenuState(_data)), true);
 	  	}
 	  }

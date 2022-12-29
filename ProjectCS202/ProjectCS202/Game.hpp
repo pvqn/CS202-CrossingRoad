@@ -33,3 +33,5 @@ private:
 
 	void Run();
 };
+extern sf::Music music1;
+extern sf::Music music2;

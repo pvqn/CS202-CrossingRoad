@@ -1,5 +1,5 @@
 #include "MainMenuState.hpp"
-#include "GameOverState.hpp"
+
 /*
 void MainMenuState::initWindow()
 {
@@ -231,8 +231,7 @@ void MainMenuState::Init()
     _loadButton.setPosition(460.0f, 348.0f);
     _rankButton.setPosition(450.0f, 405.0f);
     _ruleButton.setPosition(460.0f, 465.0f);
-    music1.openFromFile(string(MUSIC_PATH));
-    music1.setVolume(50);
+
 }
 
 void MainMenuState::HandleInput()
@@ -249,10 +248,12 @@ void MainMenuState::HandleInput()
         // check clicked
         if (this->_data->input.IsSpriteClicked(this->_playButton, sf::Mouse::Left, this->_data->window))
         {
+            music1.setVolume(25);
             this->_data->machine.AddState(StateRef(new GameState(_data, false)), true);
         }
         if (this->_data->input.IsSpriteClicked(this->_loadButton, sf::Mouse::Left, this->_data->window))
         {
+            music1.setVolume(25);
             this->_data->machine.AddState(StateRef(new GameState(_data, true)), true);
         }
         if (this->_data->input.IsSpriteClicked(this->_rankButton, sf::Mouse::Left, this->_data->window))
@@ -290,11 +291,6 @@ void MainMenuState::HandleInput()
 
 void MainMenuState::Update(float dt)
 {
-    if ((music1.getStatus() == music1.Stopped && music2.getStatus() == music2.Stopped) || music2.getStatus() == music2.Playing)
-    {
-        music2.stop();
-        music1.play();
-    } 
 }
 
 void MainMenuState::Draw(float dt)
