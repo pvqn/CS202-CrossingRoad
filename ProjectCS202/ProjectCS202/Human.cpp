@@ -1,21 +1,21 @@
 #include "Human.h"
-void Human::initTexture()
-{
-	// load from file
-	std::string load=std::string(RESOURCE_PATH) + "human.png";
-	if (this->texture.loadFromFile(load) == false)
-	{
-		std::cout << "HUMAN CLASS::Failed to load texture from file\n";
-	}
-}
-
-void Human::initSprite()
-{
-	this->sprite.setTexture(this->texture);
-
-	// scale
-	this->sprite.scale(0.7f, 0.7f);
-}
+//void Human::initTexture()
+//{
+//	// load from file
+//	std::string load=std::string(RESOURCE_PATH) + "human.png";
+//	if (this->texture.loadFromFile(load) == false)
+//	{
+//		std::cout << "HUMAN CLASS::Failed to load texture from file\n";
+//	}
+//}
+//
+//void Human::initSprite()
+//{
+//	this->sprite.setTexture(this->texture);
+//
+//	// scale
+//	this->sprite.scale(0.7f, 0.7f);
+//}
 
 Human::Human()
 {
@@ -28,21 +28,21 @@ Human::Human()
 
 Human::~Human() {}
 
-void Human::move()
-{
-	float dirX = 0.f, dirY = 0.f;
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		dirX = -1.f, dirY = 0.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		dirX = 1.f, dirY = 0.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		dirX = 0.f, dirY = -1.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		dirX = 0.f, dirY = 1.f;
-
-	this->sprite.move(this->speed * dirX, this->speed * dirY);
-}
+//void Human::move()
+//{
+//	float dirX = 0.f, dirY = 0.f;
+//
+//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+//		dirX = -1.f, dirY = 0.f;
+//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+//		dirX = 1.f, dirY = 0.f;
+//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+//		dirX = 0.f, dirY = -1.f;
+//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+//		dirX = 0.f, dirY = 1.f;
+//
+//	this->sprite.move(this->speed * dirX, this->speed * dirY);
+//}
 
 void Human::setPos(const float x, const float y)
 {
@@ -104,7 +104,7 @@ void Human::render(sf::RenderTarget& target)
 
 
 // NEW ANIMATION
-/* Uncomment to test this
+// Uncomment to test this
 
 void Human::initTexture()
 {
@@ -160,5 +160,3 @@ void Human::move()
 	}
 	this->sprite.move(this->speed * dirX, this->speed * dirY);
 }
-
-*/

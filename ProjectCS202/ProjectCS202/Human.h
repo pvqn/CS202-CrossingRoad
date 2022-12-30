@@ -15,10 +15,10 @@ class Human
 	float speed;
 
 
-/*	ANIMATION
+//	ANIMATION
 	sf::IntRect intRect;
     int frame = 10;
-*/
+
 
 	void initSprite();
 	void initTexture();
