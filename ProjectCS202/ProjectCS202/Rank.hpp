@@ -1,10 +1,4 @@
-//
-//  Rank.hpp
-//  main
-//
-//  Created by Apple on 09/12/2022.
-//  Copyright © 2022 Apple. All rights reserved.
-//
+
 
 #ifndef Rank_hpp
 #define Rank_hpp
@@ -104,8 +98,6 @@ public:
     vector<Player> players;
     vector<string> rankText;
     vector<sf::Text> _texts;
-    
-private:
     
 };
 
