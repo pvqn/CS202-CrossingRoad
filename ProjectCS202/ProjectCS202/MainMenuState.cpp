@@ -112,6 +112,16 @@ void MainMenuState::pollEvents()
                     }
                     break;
                 }
+                case 6:
+                {
+                    RuleState rule;
+                    while (rule.isRunning())
+                    {
+                        rule.update();
+                        rule.render();
+                    }
+                    break;
+                }
                 default:
                     break;
                 }
@@ -151,6 +161,16 @@ void MainMenuState::pollEvents()
                             }
                             break;
                         }
+                        case 6:
+                        {
+                            RuleState rule;
+                            while (rule.isRunning())
+                            {
+                                rule.update();
+                                rule.render();
+                            }
+                            break;
+                        }
                         default:
                             break;
                         }
@@ -186,7 +206,7 @@ void MainMenuState::render() {
 
 MainMenuState:: ~MainMenuState() {}
 */
-int GameState::_level=1;
+int GameState::_level = 1;
 
 MainMenuState::MainMenuState(GameDataRef data) : _data(data)
 {
@@ -231,7 +251,6 @@ void MainMenuState::Init()
     _loadButton.setPosition(460.0f, 348.0f);
     _rankButton.setPosition(450.0f, 405.0f);
     _ruleButton.setPosition(460.0f, 465.0f);
-
 }
 
 void MainMenuState::HandleInput()
