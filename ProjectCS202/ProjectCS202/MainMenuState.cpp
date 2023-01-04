@@ -1,4 +1,5 @@
 #include "MainMenuState.hpp"
+#include "RuleState.h"
 
 /*
 void MainMenuState::initWindow()
