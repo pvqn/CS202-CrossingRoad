@@ -23,6 +23,7 @@ public:
 	Sound();
 	void PlaySound();
 };
+
 class Obstacle {
 private:
 	sf::Vector2f recPos;
@@ -70,15 +71,16 @@ public:
 	Dog(float level);
 };
 
-vector<Car> InitCar(float level);
-vector<Truck> InitTruck(float level);
-vector<Sheep> InitSheep(float level);
-vector<Dog> InitDog(float level);
 void InitTraffic(vector<sf::Sprite>& TrafficLight, sf::Texture& light);
 
 void SwitchLightRed(vector<sf::Sprite>& TrafficLight, sf::Texture& light);
 void SwitchLightGreen(vector<sf::Sprite>& TrafficLight, sf::Texture& light);
 void CheckTime(sf::Clock& clock, sf::Time& elapsed, vector<sf::Sprite>& TrafficLight, sf::Texture& light, vector<Car>& testC, vector<Truck>& testT);
+
+vector<Car> InitCar(float level);
+vector<Truck> InitTruck(float level);
+vector<Sheep> InitSheep(float level);
+vector<Dog> InitDog(float level);
 
 void MoveCar(vector<Car>& testC, sf::RenderWindow& window);
 void MoveTruck(vector<Truck>& testT, sf::RenderWindow& window);

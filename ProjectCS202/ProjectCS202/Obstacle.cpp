@@ -126,13 +126,61 @@ Dog::Dog(float level) : Obstacle(level)
 	SetSpeed(-DOG_SPEED);
 }
 
+
+
+void InitTraffic(vector<sf::Sprite> &TrafficLight, sf::Texture &light)
+{
+	sf::Sprite TL;
+	string Load = string(RESOURCE_PATH) + "greentrafficlight.png";
+	light.loadFromFile(Load);
+	TL.setTexture(light);
+	TrafficLight.push_back(TL);
+	TrafficLight.push_back(TL);
+	TrafficLight[0].setPosition(sf::Vector2f(0, 174));
+	TrafficLight[1].setPosition(sf::Vector2f(0, 437));
+}
+
+void SwitchLightRed(vector<sf::Sprite> &TrafficLight, sf::Texture &light)
+{
+	string Load = string(RESOURCE_PATH) + "redtrafficlight.png";
+	light.loadFromFile(Load);
+	TrafficLight[0].setTexture(light);
+	TrafficLight[1].setTexture(light);
+}
+
+void SwitchLightGreen(vector<sf::Sprite> &TrafficLight, sf::Texture &light)
+{
+	string Load = string(RESOURCE_PATH) + "greentrafficlight.png";
+	light.loadFromFile(Load);
+	TrafficLight[0].setTexture(light);
+	TrafficLight[1].setTexture(light);
+}
+
+void CheckTime(sf::Clock &clock, sf::Time &elapsed, vector<sf::Sprite> &TrafficLight, sf::Texture &light, vector<Car> &testC, vector<Truck> &testT)
+{
+	if (elapsed.asSeconds() >= LIGHT_TIME)
+	{
+		if (testC[0].CheckLight())
+			SwitchLightGreen(TrafficLight, light);
+		else
+			SwitchLightRed(TrafficLight, light);
+
+		for (int i = 0; i < 4; ++i)
+		{
+			testC[i].SwitchLightSignal();
+			testT[i].SwitchLightSignal();
+			clock.restart();
+		}
+	}
+}
+
 vector<Car> InitCar(float level)
 {
 	vector<Car> testC;
 	for (float i = 0; i < VEHICLE_AMOUNT; ++i)
 	{
 		testC.push_back(Car(level));
-		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)) , 240 + 6.6);
+		testC[i].SetPosXY(i * (VEHICLE_WIDTH + (SCREEN_WIDTH - VEHICLE_WIDTH * (VEHICLE_AMOUNT - 2)) / (VEHICLE_AMOUNT - 1)), 240 + 6.6);
 	}
 	string Load = string(RESOURCE_PATH) + "car.png";
 	for (int i = 0; i < VEHICLE_AMOUNT; ++i)
@@ -188,52 +236,6 @@ vector<Dog> InitDog(float level)
 		testD[i].SetTexture(Load);
 	}
 	return testD;
-}
-
-void InitTraffic(vector<sf::Sprite> &TrafficLight, sf::Texture &light)
-{
-	sf::Sprite TL;
-	string Load = string(RESOURCE_PATH) + "greentrafficlight.png";
-	light.loadFromFile(Load);
-	TL.setTexture(light);
-	TrafficLight.push_back(TL);
-	TrafficLight.push_back(TL);
-	TrafficLight[0].setPosition(sf::Vector2f(0, 174));
-	TrafficLight[1].setPosition(sf::Vector2f(0, 437));
-}
-
-void SwitchLightRed(vector<sf::Sprite> &TrafficLight, sf::Texture &light)
-{
-	string Load = string(RESOURCE_PATH) + "redtrafficlight.png";
-	light.loadFromFile(Load);
-	TrafficLight[0].setTexture(light);
-	TrafficLight[1].setTexture(light);
-}
-
-void SwitchLightGreen(vector<sf::Sprite> &TrafficLight, sf::Texture &light)
-{
-	string Load = string(RESOURCE_PATH) + "greentrafficlight.png";
-	light.loadFromFile(Load);
-	TrafficLight[0].setTexture(light);
-	TrafficLight[1].setTexture(light);
-}
-
-void CheckTime(sf::Clock &clock, sf::Time &elapsed, vector<sf::Sprite> &TrafficLight, sf::Texture &light, vector<Car> &testC, vector<Truck> &testT)
-{
-	if (elapsed.asSeconds() >= LIGHT_TIME)
-	{
-		if (testC[0].CheckLight())
-			SwitchLightGreen(TrafficLight, light);
-		else
-			SwitchLightRed(TrafficLight, light);
-
-		for (int i = 0; i < 4; ++i)
-		{
-			testC[i].SwitchLightSignal();
-			testT[i].SwitchLightSignal();
-			clock.restart();
-		}
-	}
 }
 
 void MoveCar(vector<Car> &testC, sf::RenderWindow &window)
