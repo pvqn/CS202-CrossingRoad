@@ -15,6 +15,7 @@ private:
 	sf::SoundBuffer bufferTruck;
 	sf::SoundBuffer bufferSheep;
 	sf::SoundBuffer bufferDog;
+
 	sf::Sound _dog;
 	sf::Sound _sheep;
 	sf::Sound _truck;
