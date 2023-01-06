@@ -228,14 +228,14 @@ void GameState::Update(float dt)
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, trucks[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					
+					flash->_collide.play();
 					clock.restart();
 					break;
 				}
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, cars[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					
+					flash->_collide.play();
 					clock.restart();
 					break;
 				}
@@ -245,14 +245,14 @@ void GameState::Update(float dt)
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, sheeps[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					
+					flash->_collide.play();
 					clock.restart();
 					break;
 				}
 				if (this->_data->input.IsCollision(human->getSprite(), 0.4f, dogs[i].getSprite(), 0.7f))
 				{
 					_gameState = GameStates::eGameOver;
-					
+					flash->_collide.play();
 					clock.restart();
 					break;
 				}

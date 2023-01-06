@@ -8,6 +8,7 @@
 #include <iostream>
 #include "State.hpp"
 #include "Game.hpp"
+#include "string"
 #include "DEFINITIONS.hpp"
 class Flash {
 	  public:
@@ -15,11 +16,12 @@ class Flash {
 
 	  	void Show(float dt);
 		void Draw();
-
+		sf::Sound _collide;
 	  private:
 	  	GameDataRef _data;
 
 	  	sf::RectangleShape _shape;
-
+		sf::SoundBuffer _collideBuffer;
+		
 		bool _flashOn;
 	  };
