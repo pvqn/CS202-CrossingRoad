@@ -280,6 +280,10 @@ void MainMenuState::HandleInput()
         {
             this->_data->machine.AddState(StateRef(new RankState(_data)), true);
         }
+        if (this->_data->input.IsSpriteClicked(this->_ruleButton, sf::Mouse::Left, this->_data->window))
+        {
+            this->_data->machine.AddState(StateRef(new RuleState(_data)), true);
+        }
 
         // check hovered
         if (this->_data->input.IsHover(this->_playButton, this->_data->window))

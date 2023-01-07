@@ -1,22 +1,18 @@
 #include "RuleState.h"
 
-void RuleState::initWindow()
-{
-    this->vm = new sf::VideoMode(1024, 728);
-    this->window = new sf::RenderWindow(*this->vm, "ProjectCS202", sf::Style::Titlebar | sf::Style::Close);
+//void RuleState::initWindow()
+//{
+//    this->vm = new sf::VideoMode(1024, 728);
+//    this->window = new sf::RenderWindow(*this->vm, "ProjectCS202", sf::Style::Titlebar | sf::Style::Close);
+//
+//    this->window->setFramerateLimit(60);
+//}
 
-    this->window->setFramerateLimit(60);
-}
-
-void RuleState::initRuleMenu() {
+void RuleState::Init() {
     if (this->ruleTex.loadFromFile("Resources/res/rule.png") == false)
-        std::cout << "rule:: Failed to load texture"
-        << "\n";
-    std::cout << "SUCCESS\n";
+        std::cout << "rule:: Failed to load texture" << "\n";
     this->rule.setTexture(this->ruleTex);
-}
 
-void RuleState::initButtons() {
     this->Buttons.resize(2);
     this->ButtonsTex.resize(2);
     loadButton(0, "Resources/res/exitbutton.png");
@@ -26,80 +22,44 @@ void RuleState::initButtons() {
     this->Buttons[1].setPosition(83.0f, 26.0f);
 }
 
-RuleState::RuleState() {
-    initWindow();
-    initRuleMenu();
-    initButtons();
-}
-
-const bool RuleState::isRunning() const
+RuleState::RuleState(GameDataRef data) : _data(data)
 {
-    return this->window->isOpen();
 }
 
 void RuleState::loadButton(int index, std::string file) {
     if (this->ButtonsTex[index].loadFromFile(file) == false)
-        std::cout << "rule:: Failed to load button"
-        << "\n";
-    std::cout << "SUCCESS\n";
+        std::cout << "rule:: Failed to load button" << "\n";
     this->Buttons[index].setTexture(this->ButtonsTex[index]);
 }
 
-void RuleState::pollEvents()
+void RuleState::HandleInput()
 {
-    while (this->window->pollEvent(this->ev))
+    sf::Event event;
+
+    while (this->_data->window.pollEvent(event))
     {
-        switch (this->ev.type)
+        if (sf::Event::Closed == event.type || this->_data->input.IsSpriteClicked(Buttons[0], sf::Mouse::Left, this->_data->window))
         {
-        case sf::Event::Closed:
-            this->window->close();
-            break;
-        case sf::Event::KeyPressed:
-            if (this->ev.key.code == sf::Keyboard::Escape)
-                this->window->close();
-            break;
-        case sf::Event::MouseButtonPressed:
-            if (this->ev.mouseButton.button == sf::Mouse::Left) {
-                for (int i = 0; i < 2; i++)
-                {
-                    if (this->Buttons[i].getGlobalBounds().contains(this->mousePosView))
-                    {
-                        switch (i) {
-                        case 0: this->window->close();
-                            break;
-                        case 1: this->window->close();
-                            break;
-                        default:
-                            break;
-                        }
-                    }
-                }
-            }
-        default:
-            break;
+            this->_data->window.close();
+        }
+        if (this->_data->input.IsSpriteClicked(Buttons[1], sf::Mouse::Left, this->_data->window))
+        {
+            _data->machine.AddState(StateRef(new MainMenuState(_data)), true);
         }
     }
 }
 
-void RuleState::updateMousePos()
+void RuleState::Update(float dt)
 {
-    this->mousePosWindow = sf::Mouse::getPosition(*this->window);
-    this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
 }
 
-void RuleState::update()
-{
-    this->updateMousePos();
-    this->pollEvents();
-}
-
-void RuleState::render() {
-    this->window->clear();
-    this->window->draw(rule);
+void RuleState::Draw(float dt) {
+    this->_data->window.clear();
+    this->_data->window.draw(rule);
     for (int i = 0; i < 2; i++) {
-        this->window->draw(this->Buttons[i]);
+        this->_data->window.draw(this->Buttons[i]);
     }
-    this->window->display();
+    this->_data->window.display();
 }
 
 RuleState:: ~RuleState() {}

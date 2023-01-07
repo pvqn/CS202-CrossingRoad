@@ -1,5 +1,7 @@
 #pragma once
-
+#include "State.hpp"
+#include "Game.hpp"
+#include "MainMenuState.hpp"
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
@@ -8,12 +10,10 @@
 #include <SFML/Window.hpp>
 #include <iostream>
 
-class RuleState
+class RuleState : public State
 {
 private:
-    sf::RenderWindow* window;
-    sf::VideoMode* vm;
-    sf::Event ev;
+    GameDataRef _data;
 
     // background
     sf::Sprite rule;
@@ -24,21 +24,23 @@ private:
     std::vector<sf::Texture> ButtonsTex;
 
     // Mouse
-    sf::Vector2i mousePosWindow;
-    sf::Vector2f mousePosView;
+    //sf::Vector2i mousePosWindow;
+    //sf::Vector2f mousePosView;
 
-    void initWindow();
-    void initRuleMenu();
-    void initButtons();
+    //void initWindow();
+    //void initRuleMenu();
+    //void initButtons();
 
 public:
-    RuleState();
-    void updateMousePos();
-    const bool isRunning() const;
+    RuleState(GameDataRef data);
+    void Init();
+    void HandleInput();
+    void Update(float dt);
+    void Draw(float dt);
     void loadButton(int index, std::string file);
-    void pollEvents();
+    /*void pollEvents();
     void update();
-    void render();
+    void render();*/
     ~RuleState();
 };
 
